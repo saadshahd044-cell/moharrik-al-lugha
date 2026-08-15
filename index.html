@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مُحَرِّك اللغة 001</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Tahoma,Arial,sans-serif;
+  background:linear-gradient(135deg,#fff7e8,#eef9ff);
+  color:#263238;
+  min-height:100vh;
+}
+.app{
+  max-width:650px;
+  margin:auto;
+  padding:22px 16px 35px;
+}
+.card{
+  background:white;
+  border-radius:28px;
+  padding:25px 20px;
+  box-shadow:0 12px 35px rgba(0,0,0,.10);
+  text-align:center;
+}
+.logo{
+  font-size:55px;
+  margin-bottom:5px;
+}
+h1{
+  margin:5px 0;
+  font-size:32px;
+}
+.subtitle{
+  color:#65727a;
+  margin-bottom:25px;
+  font-size:17px;
+}
+button{
+  border:0;
+  border-radius:18px;
+  padding:15px 25px;
+  font-size:18px;
+  font-weight:bold;
+  cursor:pointer;
+  background:#263238;
+  color:white;
+  margin:7px;
+}
+button:hover{transform:scale(1.03)}
+.primary{background:#ffb703}
+.choice{
+  background:#f1f5f7;
+  color:#263238;
+  width:90%;
+  max-width:420px;
+}
+.choice.correct{background:#b7efc5}
+.choice.wrong{background:#ffd0d0}
+.words{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  justify-content:center;
+  margin:25px 0;
+}
+.word{
+  background:#e9f4ff;
+  border:2px solid #b9dfff;
+  border-radius:15px;
+  padding:13px 17px;
+  font-size:20px;
+  cursor:pointer;
+}
+.progress{
+  height:10px;
+  background:#e7e7e7;
+  border-radius:20px;
+  overflow:hidden;
+  margin-bottom:20px;
+}
+.bar{
+  height:100%;
+  width:0%;
+  background:#ffb703;
+  transition:.4s;
+}
+.score{
+  font-weight:bold;
+  margin-bottom:15px;
+}
+.feedback{
+  min-height:35px;
+  font-weight:bold;
+  margin:12px;
+  font-size:18px;
+}
+.hidden{display:none}
+.final-stars{
+  font-size:45px;
+  margin:15px;
+}
+.footer{
+  margin-top:25px;
+  font-weight:bold;
+  color:#555;
+  line-height:1.7;
+}
+.question{
+  font-size:23px;
+  line-height:1.8;
+  margin:20px 0;
+}
+.small{
+  color:#777;
+  font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- البداية -->
+<section id="home" class="card">
+  <div class="logo">🧠</div>
+  <h1>مُحَرِّك اللغة</h1>
+  <div class="subtitle">حرّكها… فتتغيّر!</div>
+
+  <p>
+    هنا مش هنحفظ الجملة بس…<br>
+    هنحرّكها ونشوف اللغة وهي بتتغيّر ✨
+  </p>
+
+  <button class="primary" onclick="startGame()">ابدأ اللعب 🎮</button>
+
+  <div class="footer">
+    مع أستاذة شهد…<br>
+    <b>مش بنحفظ اللغة، إحنا بنشغّلها!</b>
+  </div>
+</section>
+
+
+<!-- اللعبة -->
+<section id="game" class="card hidden">
+
+  <div class="score">
+    ⭐ النقاط: <span id="score">0</span>
+  </div>
+
+  <div class="progress">
+    <div id="bar" class="bar"></div>
+  </div>
+
+  <div id="question"></div>
+
+  <div id="answers"></div>
+
+  <div id="feedback" class="feedback"></div>
+
+  <button id="next" class="primary hidden" onclick="nextQuestion()">
+    السؤال التالي ➜
+  </button>
+
+</section>
+
+
+<!-- النهاية -->
+<section id="final" class="card hidden">
+  <div class="logo">🏆</div>
+  <h1>أحسنتِ! 🎉</h1>
+
+  <div class="final-stars" id="stars">⭐⭐⭐</div>
+
+  <p class="question">
+    نتيجتك:
+    <br>
+    <b><span id="finalScore">0</span> / 4</b>
+  </p>
+
+  <p id="finalMessage"></p>
+
+  <button class="primary" onclick="restartGame()">
+    العب من جديد 🔄
+  </button>
+
+  <div class="footer">
+    ✨ مع أستاذة شهد…<br>
+    <b>مش بنحفظ اللغة، إحنا بنشغّلها!</b>
+  </div>
+</section>
+
+</div>
+
+
+<script>
+
+let current = 0;
+let score = 0;
+
+const questions = [
+
+{
+  type:"choice",
+  title:"🧩 رتّب الكلمات لتكوين جملة صحيحة",
+  text:"كَتَبَ — أَحْمَدُ — الدَّرْسَ",
+  options:[
+    "كَتَبَ أَحْمَدُ الدَّرْسَ.",
+    "الدَّرْسَ كَتَبَ أَحْمَدُ.",
+    "أَحْمَدُ الدَّرْسَ كَتَبَ."
+  ],
+  answer:0
+},
+
+{
+  type:"choice",
+  title:"⚙️ شغّل مُحرّك الزمن",
+  text:"كَتَبَ أَحْمَدُ الدَّرْسَ.",
+  options:[
+    "يَكْتُبُ أَحْمَدُ الدَّرْسَ.",
+    "سَيَكْتُبَ أَحْمَدُ الدَّرْسَ.",
+    "كَاتِبٌ أَحْمَدُ الدَّرْسَ."
+  ],
+  answer:0
+},
+
+{
+  type:"choice",
+  title:"👥 غيّر الفاعل إلى الجمع",
+  text:"يَكْتُبُ أَحْمَدُ الدَّرْسَ.",
+  options:[
+    "يَكْتُبُونَ الطُّلَّابُ الدَّرْسَ.",
+    "يَكْتُبُ الطُّلَّابُ الدَّرْسَ.",
+    "يَكْتُبُ الطُّلَّابَ الدَّرْسَ."
+  ],
+  answer:1
+},
+
+{
+  type:"choice",
+  title:"❓ حوّل الجملة إلى سؤال",
+  text:"يَكْتُبُ الطُّلَّابُ الدَّرْسَ.",
+  options:[
+    "هَلْ يَكْتُبُ الطُّلَّابُ الدَّرْسَ؟",
+    "مَنْ يَكْتُبُ الطُّلَّابُ الدَّرْسَ؟",
+    "أَيْنَ يَكْتُبُ الطُّلَّابُ الدَّرْسَ."
+  ],
+  answer:0
+}
+
+];
+
+
+function startGame(){
+  current=0;
+  score=0;
+
+  document.getElementById("home").classList.add("hidden");
+  document.getElementById("final").classList.add("hidden");
+  document.getElementById("game").classList.remove("hidden");
+
+  showQuestion();
+}
+
+
+function showQuestion(){
+
+  const q=questions[current];
+
+  document.getElementById("score").textContent=score;
+
+  document.getElementById("bar").style.width=
+    ((current)/questions.length*100)+"%";
+
+  document.getElementById("question").innerHTML=
+    `<h2>${q.title}</h2>
+     <div class="question">${q.text}</div>`;
+
+  const answers=document.getElementById("answers");
+  answers.innerHTML="";
+
+  q.options.forEach((option,index)=>{
+
+    const btn=document.createElement("button");
+
+    btn.className="choice";
+    btn.textContent=option;
+
+    btn.onclick=()=>checkAnswer(index);
+
+    answers.appendChild(btn);
+  });
+
+  document.getElementById("feedback").textContent="";
+  document.getElementById("next").classList.add("hidden");
+}
+
+
+function checkAnswer(index){
+
+  const q=questions[current];
+
+  const buttons=document.querySelectorAll(".choice");
+
+  buttons.forEach(b=>b.disabled=true);
+
+  if(index===q.answer){
+
+    score++;
+
+    buttons[index].classList.add("correct");
+
+    document.getElementById("feedback").textContent=
+      "🎉 ممتاز! إجابة صحيحة.";
+
+  }else{
+
+    buttons[index].classList.add("wrong");
+
+    buttons[q.answer].classList.add("correct");
+
+    document.getElementById("feedback").textContent=
+      "💡 قريب جدًا! شوفي الإجابة الصحيحة.";
+  }
+
+  document.getElementById("score").textContent=score;
+
+  document.getElementById("next").classList.remove("hidden");
+}
+
+
+function nextQuestion(){
+
+  current++;
+
+  if(current>=questions.length){
+
+    finishGame();
+
+  }else{
+
+    showQuestion();
+  }
+}
+
+
+function finishGame(){
+
+  document.getElementById("game").classList.add("hidden");
+  document.getElementById("final").classList.remove("hidden");
+
+  document.getElementById("finalScore").textContent=score;
+
+  let stars="⭐";
+
+  if(score>=2) stars="⭐⭐";
+
+  if(score>=3) stars="⭐⭐⭐";
+
+  if(score===4) stars="🌟🌟🌟🌟";
+
+  document.getElementById("stars").textContent=stars;
+
+  let message="";
+
+  if(score===4){
+    message="عبقرية! 🔥 أنتِ شغّلتي مُحرّك اللغة بالكامل!";
+  }else if(score>=2){
+    message="شغل ممتاز! 👏 جرّبي مرة ثانية لتحصلي على العلامة الكاملة.";
+  }else{
+    message="البداية هي الأهم 🤍 جرّبي مرة أخرى وشغّلي المُحرّك من جديد.";
+  }
+
+  document.getElementById("finalMessage").textContent=message;
+}
+
+
+function restartGame(){
+  startGame();
+}
+
+</script>
+
+</body>
+</html>
