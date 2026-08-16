@@ -3,67 +3,330 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>لغز الأستاذة شهد عودة</title>
 
 <style>
-*{
-  box-sizing:border-box;
+* {
+  box-sizing: border-box;
 }
 
-body{
-  margin:0;
-  min-height:100vh;
-  font-family:Tahoma,Arial,sans-serif;
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Tahoma, Arial, sans-serif;
   background:
-    radial-gradient(circle at 15% 15%,#dff7ff 0 10%,transparent 25%),
-    radial-gradient(circle at 85% 85%,#e4dcff 0 10%,transparent 25%),
-    linear-gradient(135deg,#f7fbff,#eef4ff);
-  color:#18243a;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:18px;
+    radial-gradient(circle at 15% 15%, #dff7ff 0 10%, transparent 25%),
+    radial-gradient(circle at 85% 85%, #e4dcff 0 10%, transparent 25%),
+    linear-gradient(135deg, #f7fbff, #eef4ff);
+  color: #18243a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 18px;
 }
 
-.game{
-  width:100%;
-  max-width:620px;
-  background:rgba(255,255,255,.94);
-  border-radius:30px;
-  padding:24px;
-  box-shadow:0 20px 60px rgba(38,71,120,.18);
-  border:1px solid #e5edfa;
-  text-align:center;
+.game {
+  width: 100%;
+  max-width: 620px;
+  background: rgba(255,255,255,0.95);
+  border-radius: 30px;
+  padding: 24px;
+  box-shadow: 0 20px 60px rgba(38,71,120,0.18);
+  border: 1px solid #e5edfa;
+  text-align: center;
 }
 
-.badge{
-  display:inline-block;
-  background:#e9f5ff;
-  color:#1673b8;
-  padding:8px 16px;
-  border-radius:30px;
-  font-size:14px;
-  font-weight:bold;
+.badge {
+  display: inline-block;
+  background: #e9f5ff;
+  color: #1673b8;
+  padding: 8px 16px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: bold;
 }
 
-h1{
-  margin:14px 0 5px;
-  font-size:30px;
-  color:#1769aa;
+h1 {
+  margin: 14px 0 5px;
+  font-size: 30px;
+  color: #1769aa;
 }
 
-.subtitle{
-  margin:0 0 20px;
-  color:#66758c;
+.subtitle {
+  margin: 0 0 20px;
+  color: #66758c;
 }
 
-.cup{
-  width:120px;
-  height:120px;
-  margin:15px auto 22px;
-  border-radius:50%;
-  background:linear-gradient(145deg,#149bea,#0755b8);
-  display:flex;
-  align-items:center;
-  justify-content:center;
- 
+.cup {
+  width: 120px;
+  height: 120px;
+  margin: 15px auto 22px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #149bea, #0755b8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 62px;
+  box-shadow:
+    0 15px 25px rgba(10,91,177,0.28),
+    inset 0 4px 10px rgba(255,255,255,0.3);
+  animation: float 2.5s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.card {
+  background: #f7faff;
+  border: 2px dashed #c7dcf4;
+  border-radius: 22px;
+  padding: 20px;
+  margin: 15px 0;
+}
+
+.question {
+  font-size: 21px;
+  line-height: 1.8;
+  font-weight: bold;
+}
+
+input {
+  width: 100%;
+  padding: 15px;
+  border: 2px solid #d5e4f5;
+  border-radius: 15px;
+  font-size: 18px;
+  text-align: center;
+  outline: none;
+  margin-top: 14px;
+  font-family: inherit;
+}
+
+input:focus {
+  border-color: #1788d3;
+  box-shadow: 0 0 0 4px #e4f4ff;
+}
+
+button {
+  border: 0;
+  border-radius: 15px;
+  padding: 14px 22px;
+  font-size: 17px;
+  font-family: inherit;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 12px;
+}
+
+.check {
+  width: 100%;
+  background: linear-gradient(135deg, #087dcc, #1554b8);
+  color: white;
+  box-shadow: 0 8px 18px rgba(15,91,170,0.25);
+}
+
+.check:active {
+  transform: scale(0.98);
+}
+
+.clue {
+  background: white;
+  color: #1769aa;
+  border: 2px solid #d7eafa;
+  margin: 6px;
+  font-size: 14px;
+}
+
+#clueText {
+  min-height: 25px;
+}
+
+#result {
+  min-height: 30px;
+  margin-top: 15px;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 1.7;
+  }
+
+.score {
+  margin-top: 18px;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.footer {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #e5edf6;
+  color: #718096;
+  font-size: 13px;
+}
+
+.name {
+  color: #1769aa;
+  font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="game">
+
+  <div class="badge">
+    🧠 تحدّي جديد
+  </div>
+
+  <h1>
+    لغز الأستاذة شهد عودة
+  </h1>
+
+  <p class="subtitle">
+    مش كل إجابة بتكون قدام عينك… 👀
+  </p>
+
+  <div class="cup">
+    🥤
+  </div>
+
+  <div class="card">
+
+    <div class="question">
+      شيءٌ كلما أخذتَ منه كَبُر…<br>
+      فما هو؟ 🤔
+    </div>
+
+    <button class="clue" onclick="showClue(1)">
+      💡 تلميح 1
+    </button>
+
+    <button class="clue" onclick="showClue(2)">
+      🔎 تلميح 2
+    </button>
+
+    <div id="clueText"></div>
+
+    <input
+      id="answer"
+      type="text"
+      placeholder="اكتبي إجابتك هنا..."
+      autocomplete="off"
+    >
+
+    <button class="check" onclick="checkAnswer()">
+      ✨ أكشف الإجابة
+    </button>
+
+    <div id="result"></div>
+
+  </div>
+
+  <div class="score">
+    ⭐ محاولاتك:
+    <span id="attempts">0</span>
+  </div>
+
+  <div class="footer">
+    صُممت بحب وإبداع بواسطة
+    <span class="name">
+      الأستاذة شهد عودة
+    </span>
+    💙
+  </div>
+
+</div>
+
+<script>
+
+let attempts = 0;
+
+function showClue(number) {
+
+  const box = document.getElementById("clueText");
+
+  if (number === 1) {
+
+    box.innerHTML =
+      "<p style='color:#1769aa;font-weight:bold'>" +
+      "🤫 فكّري في شيء يمكن أن تحفريه." +
+      "</p>";
+
+  }
+
+  if (number === 2) {
+
+    box.innerHTML =
+      "<p style='color:#1769aa;font-weight:bold'>" +
+      "🕳️ كلما أخذتِ منه جزءًا أصبح أكبر." +
+      "</p>";
+
+  }
+}
+
+function checkAnswer() {
+
+  const answer =
+    document.getElementById("answer").value.trim();
+
+  const result =
+    document.getElementById("result");
+
+  attempts++;
+
+  document.getElementById("attempts").textContent =
+    attempts;
+
+  if (answer === "") {
+
+    result.innerHTML =
+      "✏️ اكتبي إجابتك الأول!";
+
+    result.style.color = "#d97706";
+
+    return;
+  }
+
+  const correct =
+    answer.includes("حفرة") ||
+    answer.includes("الحفرة");
+
+  if (correct) {
+
+    result.innerHTML =
+      "🎉 برافوووو! إجابة صحيحة!<br>" +
+      "الإجابة هي: الحُفرة 🕳️";
+
+    result.style.color = "#16834a";
+
+  } else {
+
+    result.innerHTML =
+      "😏 مش هي دي... حاولي تاني!";
+
+    result.style.color = "#d13c3c";
+  }
+}
+
+document
+  .getElementById("answer")
+  .addEventListener("keydown", function(e) {
+
+    if (e.key === "Enter") {
+      checkAnswer();
+    }
+
+  });
+
+</script>
+
+</body>
+</html>
