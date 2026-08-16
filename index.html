@@ -7,7 +7,6 @@
 <title>مُحَرِّك اللغة 001</title>
 
 <style>
-
 *{
     box-sizing:border-box;
 }
@@ -20,9 +19,9 @@ html,body{
 }
 
 body{
-    font-family:Tahoma, Arial, sans-serif;
+    font-family:Tahoma,Arial,sans-serif;
     background:
-        radial-gradient(circle at 50% 15%, rgba(0,145,220,.15), transparent 30%),
+        radial-gradient(circle at 50% 10%,rgba(0,150,230,.16),transparent 30%),
         linear-gradient(180deg,#020914,#031522 55%,#020914);
     color:#eefaff;
     overflow-x:hidden;
@@ -33,7 +32,7 @@ body::before{
     position:fixed;
     inset:0;
     pointer-events:none;
-    opacity:.25;
+    opacity:.22;
     background:
         linear-gradient(rgba(20,150,210,.05) 1px,transparent 1px),
         linear-gradient(90deg,rgba(20,150,210,.05) 1px,transparent 1px);
@@ -67,7 +66,7 @@ body::before{
 
 .panel{
     width:min(850px,96vw);
-    background:rgba(3,16,29,.96);
+    background:rgba(3,16,29,.97);
     border:1px solid #128dcc;
     border-radius:26px;
     padding:30px 20px;
@@ -169,7 +168,6 @@ p{
 
 .btn:hover{
     background:#084466;
-    box-shadow:0 0 25px rgba(0,174,255,.3);
 }
 
 .btn:active{
@@ -207,6 +205,62 @@ p{
     line-height:1.9;
 }
 
+.timer-box{
+    width:min(430px,90%);
+    margin:15px auto;
+    padding:12px 18px;
+    border:1px solid #17688b;
+    border-radius:15px;
+    background:#041a29;
+}
+
+.timer-label{
+    font-size:13px;
+    color:#7faabd;
+    margin-bottom:5px;
+}
+
+.timer{
+    font-size:30px;
+    font-weight:bold;
+    color:#46caff;
+    text-shadow:0 0 15px rgba(0,180,255,.4);
+}
+
+.timer.danger{
+    color:#ff647e;
+    animation:pulse .7s infinite alternate;
+}
+
+@keyframes pulse{
+    from{
+        opacity:1;
+    }
+    to{
+        opacity:.55;
+    }
+}
+
+.progress{
+    height:5px;
+    width:100%;
+    background:#071b29;
+    border-radius:10px;
+    overflow:hidden;
+    margin-top:10px;
+}
+
+.progress-bar{
+    height:100%;
+    width:100%;
+    background:#24baff;
+    transition:width 1s linear;
+}
+
+.progress-bar.danger{
+    background:#ff647e;
+}
+
 .evidence-grid{
     display:grid;
     grid-template-columns:1fr 1fr;
@@ -221,31 +275,12 @@ p{
     background:#051b2b;
 }
 
-.lock{
-    font-size:75px;
-    margin:20px;
-    filter:drop-shadow(0 0 15px rgba(0,180,255,.5));
-}
-
-input{
-    background:#020a12;
-    color:#fff;
-    border:1px solid #20a9dc;
-    border-radius:10px;
-    padding:14px;
-    font-size:20px;
-    text-align:center;
-    width:min(250px,80vw);
-    outline:none;
-}
-
-input:focus{
-    box-shadow:0 0 18px rgba(0,180,255,.25);
-}
-
 .guide-card{
-    background:
-        linear-gradient(145deg,rgba(4,28,46,.98),rgba(2,13,24,.98));
+    background:linear-gradient(
+        145deg,
+        rgba(4,28,46,.98),
+        rgba(2,13,24,.98)
+    );
     border:1px solid #17648a;
     border-radius:18px;
     padding:20px;
@@ -278,7 +313,28 @@ input:focus{
 
 .secret{
     border-color:#3bc8ff;
-    box-shadow:0 0 20px rgba(0,170,255,.08);
+}
+
+.lock{
+    font-size:75px;
+    margin:20px;
+    filter:drop-shadow(0 0 15px rgba(0,180,255,.5));
+}
+
+input{
+    background:#020a12;
+    color:#fff;
+    border:1px solid #20a9dc;
+    border-radius:10px;
+    padding:14px;
+    font-size:20px;
+    text-align:center;
+    width:min(250px,80vw);
+    outline:none;
+}
+
+input:focus{
+    box-shadow:0 0 18px rgba(0,180,255,.25);
 }
 
 .signature{
@@ -292,23 +348,11 @@ input:focus{
     color:#c4efff;
 }
 
-.small{
-    font-size:14px;
-    color:#8eb2c3;
-}
-
 .divider{
     width:70%;
     height:1px;
     background:linear-gradient(90deg,transparent,#168ec4,transparent);
     margin:25px auto;
-}
-
-.footer-code{
-    color:#47778e;
-    font-size:11px;
-    letter-spacing:2px;
-    margin-top:20px;
 }
 
 @media(max-width:520px){
@@ -329,43 +373,31 @@ input:focus{
         font-size:34px;
     }
 }
-
 </style>
 </head>
 
 <body>
 
-
-<!-- =========================
-     الصفحة 1
-========================= -->
-
+<!-- الصفحة الأولى -->
 <section id="home" class="screen active">
-
 <div class="panel">
 
     <div class="logo">🧠</div>
 
-    <div class="system">
-        LANGUAGE ENGINE 001
-    </div>
+    <div class="system">LANGUAGE ENGINE 001</div>
 
     <h1>مُحَرِّك اللغة 001</h1>
 
-    <p>
-        تم تشغيل النظام...
-    </p>
+    <p>تم تشغيل النظام...</p>
 
     <p class="warning">
         ⚠️ لكن تم اكتشاف اضطراب داخل شبكة الجمل.
     </p>
 
     <div class="box">
-
         <p class="gold">
             ⚠️ البلاغ النحوي الأول وصل الآن.
         </p>
-
     </div>
 
     <button class="btn" onclick="go('brief')">
@@ -380,29 +412,20 @@ input:focus{
     </div>
 
 </div>
-
 </section>
 
 
-<!-- =========================
-     الصفحة 2
-========================= -->
-
+<!-- الصفحة الثانية -->
 <section id="brief" class="screen">
-
 <div class="panel">
 
-    <div class="case">
-        CASE 001
-    </div>
+    <div class="case">CASE 001</div>
 
     <h2>مَن فعلها؟</h2>
 
     <div class="box">
 
-        <p>
-            حدث خلل داخل شبكة الجمل.
-        </p>
+        <p>حدث خلل داخل شبكة الجمل.</p>
 
         <p>
             الكلمات ما زالت موجودة...
@@ -427,27 +450,18 @@ input:focus{
     </button>
 
 </div>
-
 </section>
 
 
-<!-- =========================
-     الصفحة 3
-========================= -->
-
+<!-- السؤال الأول -->
 <section id="case1" class="screen">
-
 <div class="panel">
 
-    <div class="case">
-        EVIDENCE 01
-    </div>
+    <div class="case">EVIDENCE 01</div>
 
     <h2>الجملة الأولى</h2>
 
-    <p>
-        اقرأ الجملة جيدًا:
-    </p>
+    <p>اقرأ الجملة جيدًا:</p>
 
     <div class="sentence">
         كتبَ سامرٌ الدرسَ.
@@ -457,9 +471,15 @@ input:focus{
         🔍 لدينا ثلاثة مشتبه بهم.
     </p>
 
-    <p>
-        من الشخص الذي قام بالفعل؟
-    </p>
+    <p>من الشخص الذي قام بالفعل؟</p>
+
+    <div class="timer-box">
+        <div class="timer-label">⏱️ وقت التحقيق</div>
+        <div id="timer1" class="timer">20</div>
+        <div class="progress">
+            <div id="progress1" class="progress-bar"></div>
+        </div>
+    </div>
 
     <div class="options">
 
@@ -480,21 +500,14 @@ input:focus{
     <div id="case1Message" class="message"></div>
 
 </div>
-
 </section>
 
 
-<!-- =========================
-     الصفحة 4
-========================= -->
-
+<!-- الدليل الأول -->
 <section id="evidence1" class="screen">
-
 <div class="panel">
 
-    <div class="case">
-        EVIDENCE FOUND
-    </div>
+    <div class="case">EVIDENCE FOUND</div>
 
     <h2>🔓 تم اكتشاف أول دليل</h2>
 
@@ -521,31 +534,20 @@ input:focus{
     </button>
 
 </div>
-
 </section>
 
 
-<!-- =========================
-     الصفحة 5
-========================= -->
-
+<!-- السؤال الثاني -->
 <section id="case2" class="screen">
-
 <div class="panel">
 
-    <div class="case">
-        EVIDENCE 02
-    </div>
+    <div class="case">EVIDENCE 02</div>
 
     <h2>ظهور مشتبه جديد</h2>
 
     <div class="sentence">
         ركلَ اللاعبُ الكرةَ.
     </div>
-
-    <p>
-        اللاعبُ قام بالفعل.
-    </p>
 
     <div class="box">
 
@@ -563,6 +565,14 @@ input:focus{
             </strong>
         </p>
 
+    </div>
+
+    <div class="timer-box">
+        <div class="timer-label">⏱️ وقت التحقيق</div>
+        <div id="timer2" class="timer">20</div>
+        <div class="progress">
+            <div id="progress2" class="progress-bar"></div>
+        </div>
     </div>
 
     <div class="options">
@@ -584,21 +594,14 @@ input:focus{
     <div id="case2Message" class="message"></div>
 
 </div>
-
 </section>
 
 
-<!-- =========================
-     الصفحة 6
-========================= -->
-
+<!-- الدليل الثاني -->
 <section id="evidence2" class="screen">
-
 <div class="panel">
 
-    <div class="case">
-        EVIDENCE 02 FOUND
-    </div>
+    <div class="case">EVIDENCE 02 FOUND</div>
 
     <h2>اكتشاف صحيح.</h2>
 
@@ -633,21 +636,14 @@ input:focus{
     </button>
 
 </div>
-
 </section>
 
 
-<!-- =========================
-     الصفحة 7
-========================= -->
-
+<!-- سؤال الفخ -->
 <section id="case3" class="screen">
-
 <div class="panel">
 
-    <div class="case">
-        TRAP DETECTED
-    </div>
+    <div class="case">TRAP DETECTED</div>
 
     <h2>⚠️ فخ نحوي</h2>
 
@@ -671,6 +667,14 @@ input:focus{
 
     </div>
 
+    <div class="timer-box">
+        <div class="timer-label">⚠️ وقت الفخ</div>
+        <div id="timer3" class="timer">30</div>
+        <div class="progress">
+            <div id="progress3" class="progress-bar"></div>
+        </div>
+    </div>
+
     <div class="options">
 
         <button class="option" onclick="answerCase3('الكرةَ')">
@@ -690,21 +694,14 @@ input:focus{
     <div id="case3Message" class="message"></div>
 
 </div>
-
 </section>
 
 
-<!-- =========================
-     الصفحة 8
-========================= -->
-
+<!-- الدليل الثالث -->
 <section id="evidence3" class="screen">
-
 <div class="panel">
 
-    <div class="case">
-        EVIDENCE 03 FOUND
-    </div>
+    <div class="case">EVIDENCE 03 FOUND</div>
 
     <h2>⚡ أحسنت.</h2>
 
@@ -727,64 +724,39 @@ input:focus{
     </button>
 
 </div>
-
 </section>
 
 
-<!-- =========================
-     ملف الأدلة
-========================= -->
-
+<!-- ملف الأدلة -->
 <section id="evidenceFile" class="screen">
-
 <div class="panel">
 
-    <div class="case">
-        EVIDENCE FILE
-    </div>
+    <div class="case">EVIDENCE FILE</div>
 
     <h2>🗂️ ملف الأدلة</h2>
 
-    <p>
-        تم جمع الأدلة الأساسية للقضية.
-    </p>
+    <p>تم جمع الأدلة الأساسية للقضية.</p>
 
     <div class="evidence-grid">
 
         <div class="evidence-card">
-            <strong class="gold">
-                الدليل 01
-            </strong>
-            <p>
-                من قام بالفعل = الفاعل
-            </p>
+            <strong class="gold">الدليل 01</strong>
+            <p>من قام بالفعل = الفاعل</p>
         </div>
 
         <div class="evidence-card">
-            <strong class="gold">
-                الدليل 02
-            </strong>
-            <p>
-                من وقع عليه الفعل = المفعول به
-            </p>
+            <strong class="gold">الدليل 02</strong>
+            <p>من وقع عليه الفعل = المفعول به</p>
         </div>
 
         <div class="evidence-card">
-            <strong class="gold">
-                الدليل 03
-            </strong>
-            <p>
-                ترتيب الكلمات وحده لا يكفي.
-            </p>
+            <strong class="gold">الدليل 03</strong>
+            <p>ترتيب الكلمات وحده لا يكفي.</p>
         </div>
 
         <div class="evidence-card">
-            <strong class="gold">
-                الدليل 04
-            </strong>
-            <p>
-                🔒 الحركة الإعرابية
-            </p>
+            <strong class="gold">الدليل 04</strong>
+            <p>🔒 الحركة الإعرابية</p>
         </div>
 
     </div>
@@ -794,25 +766,18 @@ input:focus{
     </button>
 
 </div>
-
 </section>
 
 
-<!-- =========================
-     ملف المحقق
-========================= -->
-
+<!-- ملف المحقق -->
 <section id="guide" class="screen">
-
 <div class="panel">
 
     <div class="case">
         SECRET INVESTIGATOR FILE / 001
     </div>
 
-    <div class="lock">
-        🗂️
-    </div>
+    <div class="lock">🗂️</div>
 
     <h2>ملف المحقق</h2>
 
@@ -834,17 +799,13 @@ input:focus{
     <div class="divider"></div>
 
 
-    <!-- تلميح القضية الأولى -->
-
     <div class="guide-card">
 
         <div class="guide-title">
             🔎 القضية: مَن فعلها؟
         </div>
 
-        <p>
-            التلميح الأول:
-        </p>
+        <p>التلميح الأول:</p>
 
         <button class="btn" onclick="toggleHint('hint1')">
             إظهار التلميح
@@ -853,9 +814,7 @@ input:focus{
         <div id="hint1" class="hint">
             اسأل نفسك:
             <br><br>
-            <strong>
-                مَن قام بالفعل؟
-            </strong>
+            <strong>مَن قام بالفعل؟</strong>
             <br><br>
             لا تبحث عن الكلمة في مكان معين،
             بل ابحث عن الشخص الذي نفّذ الفعل.
@@ -863,8 +822,6 @@ input:focus{
 
     </div>
 
-
-    <!-- تلميح ثاني -->
 
     <div class="guide-card">
 
@@ -879,17 +836,13 @@ input:focus{
         <div id="hint2" class="hint">
             في الجملة:
             <br><br>
-            <strong>
-                كتبَ سامرٌ الدرسَ.
-            </strong>
+            <strong>كتبَ سامرٌ الدرسَ.</strong>
             <br><br>
             من الذي قام بالكتابة؟
         </div>
 
     </div>
 
-
-    <!-- الحل -->
 
     <div class="guide-card secret">
 
@@ -902,21 +855,15 @@ input:focus{
         </button>
 
         <div id="solution1" class="hint">
-            <strong class="success">
-                سامرٌ
-            </strong>
+            <strong class="success">سامرٌ</strong>
             <br><br>
             إذن:
             <br>
-            <strong class="gold">
-                سامرٌ = الفاعل
-            </strong>
+            <strong class="gold">سامرٌ = الفاعل</strong>
         </div>
 
     </div>
 
-
-    <!-- قضية المفعول به -->
 
     <div class="guide-card">
 
@@ -927,9 +874,7 @@ input:focus{
         <p>
             في:
             <br>
-            <strong>
-                ركلَ اللاعبُ الكرةَ.
-            </strong>
+            <strong>ركلَ اللاعبُ الكرةَ.</strong>
         </p>
 
         <button class="btn" onclick="toggleHint('hint3')">
@@ -941,9 +886,7 @@ input:focus{
             <br><br>
             اسأل:
             <br>
-            <strong>
-                على مَن وقع الفعل؟
-            </strong>
+            <strong>على مَن وقع الفعل؟</strong>
         </div>
 
     </div>
@@ -960,9 +903,7 @@ input:focus{
         </button>
 
         <div id="solution2" class="hint">
-            <strong class="success">
-                الكرةَ
-            </strong>
+            <strong class="success">الكرةَ</strong>
             <br><br>
             هي التي وقع عليها الفعل.
             <br>
@@ -976,8 +917,6 @@ input:focus{
     </div>
 
 
-    <!-- فخ ترتيب الكلمات -->
-
     <div class="guide-card">
 
         <div class="guide-title">
@@ -987,9 +926,7 @@ input:focus{
         <p>
             في:
             <br>
-            <strong>
-                الكرةَ ركلَ اللاعبُ.
-            </strong>
+            <strong>الكرةَ ركلَ اللاعبُ.</strong>
         </p>
 
         <button class="btn" onclick="toggleHint('hint4')">
@@ -999,11 +936,7 @@ input:focus{
         <div id="hint4" class="hint">
             لا تجعل أول كلمة تخدعك.
             <br><br>
-            ابحث عن الشخص الذي قام بالفعل:
-            <br>
-            <strong>
-                ركلَ
-            </strong>
+            ابحث عن الشخص الذي قام بالفعل.
         </div>
 
     </div>
@@ -1020,9 +953,7 @@ input:focus{
         </button>
 
         <div id="solution3" class="hint">
-            <strong class="success">
-                اللاعبُ
-            </strong>
+            <strong class="success">اللاعبُ</strong>
             هو الفاعل.
             <br><br>
             لأن ترتيب الكلمات لا يحدد الوظيفة النحوية وحده.
@@ -1036,25 +967,16 @@ input:focus{
     </button>
 
 </div>
-
 </section>
 
 
-<!-- =========================
-     القفل
-========================= -->
-
+<!-- القفل -->
 <section id="lock" class="screen">
-
 <div class="panel">
 
-    <div class="case">
-        FINAL LOCK
-    </div>
+    <div class="case">FINAL LOCK</div>
 
-    <div class="lock">
-        🔒
-    </div>
+    <div class="lock">🔒</div>
 
     <h2>قفل القضية</h2>
 
@@ -1086,33 +1008,22 @@ input:focus{
     <div id="lockMessage" class="message"></div>
 
 </div>
-
 </section>
 
 
-<!-- =========================
-     النهاية
-========================= -->
-
+<!-- النهاية -->
 <section id="ending" class="screen">
-
 <div class="panel">
 
-    <div class="case">
-        SECRET FILE UNLOCKED
-    </div>
+    <div class="case">SECRET FILE UNLOCKED</div>
 
-    <div class="lock">
-        🔓
-    </div>
+    <div class="lock">🔓</div>
 
     <h2 class="success">
         تم فتح القفل.
     </h2>
 
-    <p>
-        تم التحقق من الأدلة.
-    </p>
+    <p>تم التحقق من الأدلة.</p>
 
     <div class="box">
 
@@ -1124,13 +1035,9 @@ input:focus{
             تم حل القضية.
         </p>
 
-        <p>
-            تم تحديد الفاعل.
-        </p>
+        <p>تم تحديد الفاعل.</p>
 
-        <p>
-            تم اكتشاف المفعول به.
-        </p>
+        <p>تم اكتشاف المفعول به.</p>
 
         <p>
             وتم اكتشاف أن ترتيب الكلمات ليس كل شيء.
@@ -1146,17 +1053,13 @@ input:focus{
 
     <div class="box">
 
-        <p>
-            القضية القادمة:
-        </p>
+        <p>القضية القادمة:</p>
 
         <h2>
             لماذا تغيّرت نهاية الكلمة؟
         </h2>
 
-        <p class="case">
-            CASE 002
-        </p>
+        <p class="case">CASE 002</p>
 
     </div>
 
@@ -1172,17 +1075,19 @@ input:focus{
     </button>
 
 </div>
-
 </section>
 
 
 <script>
 
-/* =========================
-   التنقل بين الصفحات
-========================= */
+let timers = {};
+
+
+/* التنقل */
 
 function go(id){
+
+    stopAllTimers();
 
     document.querySelectorAll('.screen').forEach(function(screen){
         screen.classList.remove('active');
@@ -1197,90 +1102,214 @@ function go(id){
             behavior:'smooth'
         });
     }
+
+    if(id === 'case1'){
+        startTimer('timer1','progress1',20);
+    }
+
+    if(id === 'case2'){
+        startTimer('timer2','progress2',20);
+    }
+
+    if(id === 'case3'){
+        startTimer('timer3','progress3',30);
+    }
 }
 
 
-/* =========================
-   القضية الأولى
-========================= */
+/* تشغيل التايمر */
+
+function startTimer(timerId,progressId,seconds){
+
+    stopTimer(timerId);
+
+    let remaining = seconds;
+
+    const timerElement = document.getElementById(timerId);
+    const progressElement = document.getElementById(progressId);
+
+    timerElement.textContent = remaining;
+    timerElement.classList.remove('danger');
+
+    progressElement.style.width = '100%';
+    progressElement.classList.remove('danger');
+
+    timers[timerId] = setInterval(function(){
+
+        remaining--;
+
+        timerElement.textContent = remaining;
+
+        const percent = (remaining / seconds) * 100;
+        progressElement.style.width = percent + '%';
+
+        if(remaining <= 5){
+
+            timerElement.classList.add('danger');
+            progressElement.classList.add('danger');
+
+        }
+
+        if(remaining <= 0){
+
+            stopTimer(timerId);
+
+            showTimeOut(timerId);
+
+        }
+
+    },1000);
+}
+
+
+/* إيقاف تايمر واحد */
+
+function stopTimer(timerId){
+
+    if(timers[timerId]){
+        clearInterval(timers[timerId]);
+        delete timers[timerId];
+    }
+}
+
+
+/* إيقاف كل التايمرات */
+
+function stopAllTimers(){
+
+    Object.keys(timers).forEach(function(timerId){
+        clearInterval(timers[timerId]);
+    });
+
+    timers = {};
+}
+
+
+/* انتهاء الوقت */
+
+function showTimeOut(timerId){
+
+    let messageId = '';
+
+    if(timerId === 'timer1'){
+        messageId = 'case1Message';
+    }
+
+    if(timerId === 'timer2'){
+        messageId = 'case2Message';
+    }
+
+    if(timerId === 'timer3'){
+        messageId = 'case3Message';
+    }
+
+    const message = document.getElementById(messageId);
+
+    message.innerHTML = `
+        <span class="warning">
+            ⏱️ انتهى وقت التفكير...
+        </span>
+        <br>
+        هل تحتاج إلى دليل؟ 🔎
+        <br>
+        <button class="btn" onclick="go('guide')">
+            فتح ملف المحقق
+        </button>
+    `;
+}
+
+
+/* السؤال الأول */
 
 function answerCase1(answer){
+
+    stopTimer('timer1');
 
     const message = document.getElementById('case1Message');
 
     if(answer === 'سامرٌ'){
 
         message.innerHTML =
-            '<span class="success">⚡ اكتشاف صحيح.</span><br>سامرٌ هو الذي قام بالفعل.';
+            '<span class="success">⚡ اكتشاف صحيح.</span><br>' +
+            'سامرٌ هو الذي قام بالفعل.';
 
         setTimeout(function(){
             go('evidence1');
-        },1200);
+        },1000);
 
     }else{
 
+        startTimer('timer1','progress1',20);
+
         message.innerHTML =
-            '<span class="warning">ليس بهذه السرعة... 🔍</span><br>اسأل نفسك: من قام بالفعل؟';
+            '<span class="warning">ليس بهذه السرعة... 🔍</span><br>' +
+            'اسأل نفسك: من قام بالفعل؟';
 
     }
 }
 
 
-/* =========================
-   القضية الثانية
-========================= */
+/* السؤال الثاني */
 
 function answerCase2(answer){
+
+    stopTimer('timer2');
 
     const message = document.getElementById('case2Message');
 
     if(answer === 'الكرةَ'){
 
         message.innerHTML =
-            '<span class="success">🔓 اكتشاف صحيح.</span><br>الكرةَ هي التي وقع عليها الفعل.';
+            '<span class="success">🔓 اكتشاف صحيح.</span><br>' +
+            'الكرةَ هي التي وقع عليها الفعل.';
 
         setTimeout(function(){
             go('evidence2');
-        },1200);
+        },1000);
 
     }else{
 
+        startTimer('timer2','progress2',20);
+
         message.innerHTML =
-            '<span class="warning">راجع ما حدث لكل كلمة.</span><br>السؤال هو: ما الكلمة التي وقع عليها الفعل؟';
+            '<span class="warning">راجع ما حدث لكل كلمة.</span><br>' +
+            'السؤال هو: ما الكلمة التي وقع عليها الفعل؟';
 
     }
 }
 
 
-/* =========================
-   الفخ النحوي
-========================= */
+/* سؤال الفخ */
 
 function answerCase3(answer){
+
+    stopTimer('timer3');
 
     const message = document.getElementById('case3Message');
 
     if(answer === 'اللاعبُ'){
 
         message.innerHTML =
-            '<span class="success">⚡ أحسنت.</span><br>اللاعبُ هو الفاعل رغم تغيّر ترتيب الكلمات.';
+            '<span class="success">⚡ أحسنت.</span><br>' +
+            'اللاعبُ هو الفاعل رغم تغيّر ترتيب الكلمات.';
 
         setTimeout(function(){
             go('evidence3');
-        },1300);
+        },1000);
 
     }else{
 
+        startTimer('timer3','progress3',30);
+
         message.innerHTML =
-            '<span class="warning">لا تعتمد على ترتيب الكلمات.</span><br>اسأل: من قام بالفعل؟';
+            '<span class="warning">لا تعتمد على ترتيب الكلمات.</span><br>' +
+            'اسأل: من قام بالفعل؟';
 
     }
 }
 
 
-/* =========================
-   فتح القفل
-========================= */
+/* كلمة السر */
 
 function unlockCase(){
 
@@ -1289,10 +1318,19 @@ function unlockCase(){
 
     const value = input.value.trim();
 
-    if(value === 'الفاعل'){
+    /*
+      نقبل:
+      الفاعل
+      فاعل
+    */
+
+    if(value === 'الفاعل' || value === 'فاعل'){
 
         message.innerHTML =
-            '<span class="success">🔓 تم التحقق من كلمة السر.</span>';
+            '<span class="success">' +
+            '🔓 كلمة السر صحيحة.' +
+            '</span><br>' +
+            'تم التعرف على الوظيفة النحوية.';
 
         setTimeout(function(){
             go('ending');
@@ -1301,15 +1339,16 @@ function unlockCase(){
     }else{
 
         message.innerHTML =
-            '<span class="warning">🔒 كلمة السر غير صحيحة.</span><br>ارجع إلى أول دليل في القضية.';
+            '<span class="warning">' +
+            '🔒 كلمة السر غير صحيحة.' +
+            '</span><br>' +
+            'ارجع إلى أول دليل في القضية.';
 
     }
 }
 
 
-/* =========================
-   إظهار التلميحات
-========================= */
+/* التلميحات */
 
 function toggleHint(id){
 
@@ -1321,17 +1360,15 @@ function toggleHint(id){
 }
 
 
-/* =========================
-   الضغط على Enter في القفل
-========================= */
+/* Enter في كلمة السر */
 
-document.addEventListener('DOMContentLoaded', function(){
+document.addEventListener('DOMContentLoaded',function(){
 
     const password = document.getElementById('password');
 
     if(password){
 
-        password.addEventListener('keydown', function(event){
+        password.addEventListener('keydown',function(event){
 
             if(event.key === 'Enter'){
                 unlockCase();
@@ -1346,4 +1383,4 @@ document.addEventListener('DOMContentLoaded', function(){
 </script>
 
 </body>
-  </html>
+        </html>
