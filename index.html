@@ -3,30 +3,895 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>مُحَرِّك اللغة 001</title>
+<title>مُحَرِّك اللغة 001 | القضية النحوية 001</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:Tahoma,Arial,sans-serif;
+  color:#eefaff;
+  background:
+    radial-gradient(circle at 50% 20%,#073c62 0%,#031525 35%,#01060d 75%);
+  overflow-x:hidden;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.12;
+  background-image:
+    linear-gradient(#2abfff 1px,transparent 1px),
+    linear-gradient(90deg,#2abfff 1px,transparent 1px);
+  background-size:42px 42px;
+}
+
+.screen{
+  display:none;
+  min-height:100vh;
+  padding:28px 15px;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+}
+
+.screen.active{
+  display:flex;
+  animation:appear .45s ease;
+}
+
+@keyframes appear{
+  from{
+    opacity:0;
+    transform:translateY(15px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+.panel{
+  width:min(900px,96vw);
+  padding:28px 20px;
+  text-align:center;
+  border:1px solid #20b8ff88;
+  border-radius:24px;
+  background:rgba(2,12,23,.94);
+  box-shadow:
+    0 0 50px #008cff22,
+    inset 0 0 40px #008cff0b;
+}
+
+.engine{
+  width:125px;
+  height:125px;
+  border-radius:50%;
+  margin:0 auto 22px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:2px solid #25bdff;
+  box-shadow:
+    0 0 25px #009dff,
+    0 0 70px #007cff44,
+    inset 0 0 30px #008cff44;
+  animation:pulse 3s infinite;
+}
+
+@keyframes pulse{
+  50%{
+    box-shadow:
+      0 0 40px #00aaff,
+      0 0 100px #007cff66,
+      inset 0 0 50px #008cff55;
+  }
+}
+
+.engine-icon{
+  font-size:45px;
+}
+
+.system{
+  color:#48caff;
+  font-size:11px;
+  letter-spacing:3px;
+  margin-bottom:12px;
+}
+
+h1{
+  font-size:clamp(36px,9vw,65px);
+  margin:8px 0 20px;
+  text-shadow:0 0 25px #009dff;
+}
+
+h2{
+  font-size:clamp(25px,6vw,42px);
+  margin:10px 0 20px;
+}
+
+p{
+  font-size:18px;
+  line-height:2;
+  color:#c8e8f5;
+}
+
+.warning{
+  color:#ff5c7d;
+  font-weight:bold;
+}
+
+.gold{
+  color:#ffd968;
+}
+
+.green{
+  color:#42e5a1;
+}
+
+.blue{
+  color:#48caff;
+}
+
+.btn{
+  border:1px solid #25baff;
+  border-radius:12px;
+  padding:14px 28px;
+  background:linear-gradient(#0a4d76,#062237);
+  color:white;
+  font-size:17px;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:0 0 20px #008cff22;
+  margin:8px;
+}
+
+.btn:hover{
+  box-shadow:0 0 30px #008cff66;
+  transform:translateY(-2px);
+}
+
+.card{
+  max-width:720px;
+  margin:20px auto;
+  padding:22px;
+  border:1px solid #1d6d91;
+  border-radius:18px;
+  background:#041625;
+}
+
+.case{
+  color:#48caff;
+  font-size:14px;
+  letter-spacing:2px;
+}
+
+.suspects{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:12px;
+  margin:25px 0;
+}
+
+.suspect{
+  min-width:125px;
+  padding:18px 15px;
+  border-radius:15px;
+  border:1px solid #247ea4;
+  background:#061d30;
+  color:white;
+  font-size:22px;
+  cursor:pointer;
+}
+
+.suspect:hover{
+  border-color:#40c9ff;
+  box-shadow:0 0 22px #008cff44;
+}
+
+.clue{
+  min-height:60px;
+  margin:15px 0;
+  font-size:17px;
+  line-height:1.9;
+}
+
+.word{
+  font-size:clamp(40px,10vw,70px);
+  margin:25px 0;
+  text-shadow:0 0 25px #009dff88;
+}
+
+.progress{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  margin-top:25px;
+}
+
+.dot{
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:#16384b;
+}
+
+.dot.active{
+  background:#29baff;
+  box-shadow:0 0 12px #29baff;
+}
+
+.evidence-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+  margin:25px auto;
+  max-width:700px;
+}
+
+.evidence{
+  padding:18px 10px;
+  border:1px solid #205a76;
+  border-radius:14px;
+  background:#061a2b;
+}
+
+.evidence strong{
+  display:block;
+  color:#48caff;
+  margin-bottom:8px;
+}
+
+.lock{
+  width:155px;
+  height:155px;
+  border-radius:50%;
+  margin:25px auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:58px;
+  border:2px solid #168fd0;
+  box-shadow:0 0 35px #008cff33;
+}
+
+input{
+  width:210px;
+  padding:14px;
+  text-align:center;
+  font-size:20px;
+  background:#020b14;
+  color:white;
+  border:1px solid #269bc8;
+  border-radius:10px;
+  outline:none;
+}
+
+.message{
+  min-height:55px;
+  margin:15px auto;
+  max-width:650px;
+  line-height:1.9;
+}
+
+.signature{
+  margin-top:28px;
+  color:#7898a9;
+  font-size:13px;
+  line-height:1.9;
+}
+
+.signature strong{
+  color:#bceaff;
+}
+
+.secret{
+  font-size:clamp(30px,7vw,52px);
+  text-shadow:0 0 25px #20baff;
+}
+</style>
 </head>
 
-<body style="background:#06101c;color:white;text-align:center;font-family:Arial;padding:60px">
+<body>
 
-<h1>🧠 مُحَرِّك اللغة 001</h1>
+<!-- ================= البداية ================= -->
 
-<h2>تم تشغيل النظام بنجاح</h2>
+<section id="start" class="screen active">
+  <div class="panel">
 
-<p>الأستاذة شهد سعد عودة</p>
+    <div class="engine">
+      <div class="engine-icon">🧠</div>
+    </div>
 
-<button onclick="document.getElementById('test').style.display='block'">
-ابدأ التحقيق
-</button>
+    <div class="system">LANGUAGE ENGINE // 001</div>
 
-<div id="test" style="display:none;margin-top:30px">
-<h2>🕵️ القضية 001</h2>
-<p>ما الحرف المفقود في:</p>
-<h1>؟َاب</h1>
+    <h1>مُحَرِّك اللغة 001</h1>
 
-<button onclick="alert('🔓 أحسنت! اكتشفت الحرف.')">ب</button>
-<button onclick="alert('جرّب مرة أخرى.')">ت</button>
-<button onclick="alert('جرّب مرة أخرى.')">م</button>
-</div>
+    <p>
+      تم تشغيل النظام...
+      <br>
+      لكن تم اكتشاف اضطراب داخل شبكة الجمل.
+    </p>
+
+    <p class="warning">
+      ⚠️ البلاغ النحوي الأول وصل الآن.
+    </p>
+
+    <button class="btn" onclick="showScreen('briefing')">
+      🔵 فتح ملف القضية
+    </button>
+
+    <div class="signature">
+      ابتكار وتطوير<br>
+      <strong>الأستاذة شهد سعد عودة</strong>
+      <br><br>
+      «مش بنحفظ اللغة... إحنا بنشغّلها.»
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ================= البلاغ ================= -->
+
+<section id="briefing" class="screen">
+  <div class="panel">
+
+    <div class="case">CASE 001 // CLASSIFIED</div>
+
+    <h2>🕵️‍♀️ مَن فعلها؟</h2>
+
+    <div class="card">
+
+      <p>
+        حدث خلل داخل شبكة الجمل.
+      </p>
+
+      <p>
+        الكلمات ما زالت موجودة...
+        <br>
+        لكن وظائفها أصبحت غير واضحة.
+      </p>
+
+      <p class="gold">
+        هناك شخص قام بالفعل.
+        <br>
+        مهمتك أن تكتشف هويته.
+      </p>
+
+    </div>
+
+    <button class="btn" onclick="showScreen('case1')">
+      بدء التحقيق 🔍
+    </button>
+
+  </div>
+</section>
+
+
+<!-- ================= القضية الأولى ================= -->
+
+<section id="case1" class="screen">
+  <div class="panel">
+
+    <div class="case">CASE 001 // EVIDENCE 01</div>
+
+    <h2>الجملة الأولى</h2>
+
+    <p>
+      اقرأ الجملة جيدًا:
+    </p>
+
+    <div class="word">
+      كتبَ سامرٌ الدرسَ.
+    </div>
+
+    <div class="card">
+
+      <p class="gold">
+        🔍 لدينا ثلاثة مشتبه بهم.
+      </p>
+
+      <p>
+        من الشخص الذي قام بالفعل؟
+      </p>
+
+      <div class="suspects">
+
+        <button class="suspect" onclick="checkCase1('كتبَ')">
+          كتبَ
+        </button>
+
+        <button class="suspect" onclick="checkCase1('سامرٌ')">
+          سامرٌ
+        </button>
+
+        <button class="suspect" onclick="checkCase1('الدرسَ')">
+          الدرسَ
+        </button>
+
+      </div>
+
+      <div id="case1Message" class="message"></div>
+
+    </div>
+
+    <div class="progress">
+      <span class="dot active"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ================= دليل الفاعل ================= -->
+
+<section id="evidence1" class="screen">
+  <div class="panel">
+
+    <div class="engine">
+      <div class="engine-icon">🔓</div>
+    </div>
+
+    <div class="case">EVIDENCE FOUND</div>
+
+    <h2>تم اكتشاف أول دليل</h2>
+
+    <div class="card">
+
+      <p>
+        أنت لم تحفظ الإجابة...
+      </p>
+
+      <p class="green">
+        أنت اكتشفت من قام بالفعل.
+      </p>
+
+      <hr style="border-color:#17475e">
+
+      <p>
+        <span class="blue">الدليل 01</span>
+        <br><br>
+        من قام بالفعل في الجملة
+        <br>
+        هو <strong>الفاعل</strong>.
+      </p>
+
+    </div>
+
+    <button class="btn" onclick="showScreen('case2')">
+      متابعة التحقيق ←
+    </button>
+
+  </div>
+</section>
+
+
+<!-- ================= القضية الثانية ================= -->
+
+<section id="case2" class="screen">
+  <div class="panel">
+
+    <div class="case">CASE 001 // EVIDENCE 02</div>
+
+    <h2>ظهور مشتبه جديد</h2>
+
+    <div class="word">
+      ركلَ اللاعبُ الكرةَ.
+    </div>
+
+    <div class="card">
+
+      <p>
+        اللاعبُ قام بالفعل.
+      </p>
+
+      <p class="gold">
+        لكن ماذا حدث للكرة؟
+      </p>
+
+      <div class="suspects">
+
+        <button class="suspect" onclick="checkCase2('اللاعب')">
+          اللاعبُ
+        </button>
+
+        <button class="suspect" onclick="checkCase2('الكرة')">
+          الكرةَ
+        </button>
+
+        <button class="suspect" onclick="checkCase2('ركل')">
+          ركلَ
+        </button>
+
+      </div>
+
+      <div id="case2Message" class="message"></div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ================= دليل المفعول ================= -->
+
+<section id="evidence2" class="screen">
+  <div class="panel">
+
+    <div class="engine">
+      <div class="engine-icon">🧩</div>
+    </div>
+
+    <div class="case">EVIDENCE 02 FOUND</div>
+
+    <h2>دليل جديد</h2>
+
+    <div class="card">
+
+      <p>
+        الكرة لم تقم بالفعل.
+      </p>
+
+      <p>
+        بل وقع عليها الفعل.
+      </p>
+
+      <p class="green">
+        إذن لدينا وظيفة نحوية جديدة:
+      </p>
+
+      <h2 class="blue">المفعول به</h2>
+
+      <p>
+        هو الذي وقع عليه الفعل.
+      </p>
+
+    </div>
+
+    <button class="btn" onclick="showScreen('case3')">
+      القضية التالية ←
+    </button>
+
+  </div>
+</section>
+
+
+<!-- ================= الفخ ================= -->
+
+<section id="case3" class="screen">
+  <div class="panel">
+
+    <div class="case">CASE 001 // TRAP</div>
+
+    <h2>⚠️ فخ نحوي</h2>
+
+    <p>
+      هذه المرة تغيّر ترتيب الكلمات.
+    </p>
+
+    <div class="word">
+      الكرةَ ركلَ اللاعبُ.
+    </div>
+
+    <div class="card">
+
+      <p class="gold">
+        لا تعتمد على مكان الكلمة.
+      </p>
+
+      <p>
+        من قام بالفعل؟
+      </p>
+
+      <div class="suspects">
+
+        <button class="suspect" onclick="checkCase3('الكرة')">
+          الكرةَ
+        </button>
+
+        <button class="suspect" onclick="checkCase3('اللاعب')">
+          اللاعبُ
+        </button>
+
+        <button class="suspect" onclick="checkCase3('ركل')">
+          ركلَ
+        </button>
+
+      </div>
+
+      <div id="case3Message" class="message"></div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ================= لوحة الأدلة ================= -->
+
+<section id="evidenceBoard" class="screen">
+  <div class="panel">
+
+    <div class="case">INVESTIGATION DATABASE</div>
+
+    <h2>🗂 ملف الأدلة</h2>
+
+    <p>
+      تم جمع الأدلة الأساسية للقضية.
+    </p>
+
+    <div class="evidence-grid">
+
+      <div class="evidence">
+        <strong>الدليل 01</strong>
+        من قام بالفعل = الفاعل
+      </div>
+
+      <div class="evidence">
+        <strong>الدليل 02</strong>
+        من وقع عليه الفعل = المفعول به
+      </div>
+
+      <div class="evidence">
+        <strong>الدليل 03</strong>
+        ترتيب الكلمات وحده لا يكفي.
+      </div>
+
+      <div class="evidence" style="opacity:.4">
+        <strong>الدليل 04</strong>
+        🔒 الحركة الإعرابية
+      </div>
+
+    </div>
+
+    <button class="btn" onclick="showScreen('lock')">
+      🔐 الوصول إلى القفل
+    </button>
+
+  </div>
+</section>
+
+
+<!-- ================= القفل ================= -->
+
+<section id="lock" class="screen">
+  <div class="panel">
+
+    <div class="case">SECURITY GATE</div>
+
+    <h2>🔐 قفل القضية</h2>
+
+    <div class="lock">
+      🔒
+    </div>
+
+    <p>
+      النظام يطلب كلمة السر.
+      <br>
+      استخدم أول وظيفة نحوية اكتشفتها.
+    </p>
+
+    <input id="code" type="text" placeholder="اكتب الرمز">
+
+    <br>
+
+    <button class="btn" onclick="unlockCase()">
+      فتح القفل
+    </button>
+
+    <div id="lockMessage" class="message"></div>
+
+  </div>
+</section>
+
+
+<!-- ================= النهاية ================= -->
+
+<section id="ending" class="screen">
+  <div class="panel">
+
+    <div class="engine">
+      <div class="engine-icon">⚡</div>
+    </div>
+
+    <div class="case">CASE 001 // CLOSED</div>
+
+    <h2 class="green">تم حل القضية</h2>
+
+    <div class="card">
+
+      <p>
+        تم تحديد الفاعل.
+      </p>
+
+      <p>
+        تم اكتشاف المفعول به.
+      </p>
+
+      <p>
+        وتم اكتشاف أن ترتيب الكلمات ليس كل شيء.
+      </p>
+
+    </div>
+
+    <p class="gold">
+      لكن...
+    </p>
+
+    <p class="warning">
+      ⚠️ تم اكتشاف ملف نحوي سري.
+    </p>
+
+    <div class="card">
+
+      <p>
+        القضية القادمة:
+      </p>
+
+      <h2 class="blue">
+        لماذا تغيّرت نهاية الكلمة؟
+      </h2>
+
+      <p>
+        <strong>CASE 002</strong>
+      </p>
+
+    </div>
+
+    <div class="signature">
+      ابتكار وتطوير<br>
+      <strong>الأستاذة شهد سعد عودة</strong>
+      <br><br>
+      «مش بنحفظ اللغة... إحنا بنشغّلها.»
+    </div>
+
+    <br>
+
+    <button class="btn" onclick="location.reload()">
+      🔄 إعادة التحقيق
+    </button>
+
+  </div>
+</section>
+
+
+<script>
+
+function showScreen(id){
+  document.querySelectorAll(".screen").forEach(function(screen){
+    screen.classList.remove("active");
+  });
+
+  var target=document.getElementById(id);
+
+  if(target){
+    target.classList.add("active");
+    window.scrollTo(0,0);
+  }
+}
+
+
+/* القضية الأولى */
+
+function checkCase1(answer){
+
+  var message=document.getElementById("case1Message");
+
+  if(answer==="سامرٌ"){
+
+    message.className="message green";
+
+    message.innerHTML=
+      "🟢 تطابق قوي.<br><br>"+
+      "سامر هو الذي قام بالفعل.<br><br>"+
+      "<button class='btn' onclick=\"showScreen('evidence1')\">🔓 تسجيل الدليل</button>";
+
+  }else{
+
+    message.className="message gold";
+
+    message.innerHTML=
+      "الإشارة غير مكتملة...<br>"+
+      "اسأل نفسك: <strong>من الذي قام بالفعل؟</strong>";
+
+  }
+}
+
+
+/* القضية الثانية */
+
+function checkCase2(answer){
+
+  var message=document.getElementById("case2Message");
+
+  if(answer==="الكرة"){
+
+    message.className="message green";
+
+    message.innerHTML=
+      "🟢 اكتشاف صحيح.<br><br>"+
+      "الكرة لم تقم بالفعل، بل وقع عليها الفعل.<br><br>"+
+      "<button class='btn' onclick=\"showScreen('evidence2')\">🔓 حفظ الدليل</button>";
+
+  }else{
+
+    message.className="message gold";
+
+    message.innerHTML=
+      "راجع ما حدث لكل كلمة.<br>"+
+      "من قام بالفعل؟ ومن وقع عليه الفعل؟";
+
+  }
+}
+
+
+/* الفخ */
+
+function checkCase3(answer){
+
+  var message=document.getElementById("case3Message");
+
+  if(answer==="اللاعب"){
+
+    message.className="message green";
+
+    message.innerHTML=
+      "⚡ أحسنت.<br><br>"+
+      "اللاعب هو الفاعل رغم أن الجملة تغيّر ترتيبها.<br><br>"+
+      "<button class='btn' onclick=\"showScreen('evidenceBoard')\">🗂 فتح ملف الأدلة</button>";
+
+  }else{
+
+    message.className="message gold";
+
+    message.innerHTML=
+      "لا تعتمد على أول كلمة.<br>"+
+      "ابحث عن الشخص الذي قام بالفعل.";
+
+  }
+}
+
+
+/* القفل */
+
+function unlockCase(){
+
+  var code=document.getElementById("code").value.trim();
+  var message=document.getElementById("lockMessage");
+
+  if(code==="الفاعل"){
+
+    message.className="message green";
+
+    message.innerHTML=
+      "🔓 تم فتح القفل.<br><br>"+
+      "تم التحقق من الأدلة.<br><br>"+
+      "<button class='btn' onclick=\"showScreen('ending')\">⚡ فتح الملف السري</button>";
+
+  }else{
+
+    message.className="message gold";
+
+    message.innerHTML=
+      "الرمز غير صحيح.<br>"+
+      "تذكّر أول وظيفة نحوية اكتشفتها.";
+
+  }
+}
+
+</script>
 
 </body>
-</html>
+  </html>
