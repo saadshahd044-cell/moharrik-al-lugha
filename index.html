@@ -3,893 +3,1345 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>مُحَرِّك اللغة 001 | القضية النحوية 001</title>
+
+<title>مُحَرِّك اللغة 001</title>
 
 <style>
+
 *{
-  box-sizing:border-box;
-  -webkit-tap-highlight-color:transparent;
+    box-sizing:border-box;
+}
+
+html,body{
+    margin:0;
+    padding:0;
+    width:100%;
+    min-height:100%;
 }
 
 body{
-  margin:0;
-  min-height:100vh;
-  font-family:Tahoma,Arial,sans-serif;
-  color:#eefaff;
-  background:
-    radial-gradient(circle at 50% 20%,#073c62 0%,#031525 35%,#01060d 75%);
-  overflow-x:hidden;
+    font-family:Tahoma, Arial, sans-serif;
+    background:
+        radial-gradient(circle at 50% 15%, rgba(0,145,220,.15), transparent 30%),
+        linear-gradient(180deg,#020914,#031522 55%,#020914);
+    color:#eefaff;
+    overflow-x:hidden;
 }
 
 body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  opacity:.12;
-  background-image:
-    linear-gradient(#2abfff 1px,transparent 1px),
-    linear-gradient(90deg,#2abfff 1px,transparent 1px);
-  background-size:42px 42px;
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    opacity:.25;
+    background:
+        linear-gradient(rgba(20,150,210,.05) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(20,150,210,.05) 1px,transparent 1px);
+    background-size:40px 40px;
 }
 
 .screen{
-  display:none;
-  min-height:100vh;
-  padding:28px 15px;
-  align-items:center;
-  justify-content:center;
-  position:relative;
+    display:none;
+    min-height:100vh;
+    width:100%;
+    padding:25px 15px;
+    align-items:center;
+    justify-content:center;
 }
 
 .screen.active{
-  display:flex;
-  animation:appear .45s ease;
+    display:flex;
+    animation:fadeIn .5s ease;
 }
 
-@keyframes appear{
-  from{
-    opacity:0;
-    transform:translateY(15px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(15px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
 
 .panel{
-  width:min(900px,96vw);
-  padding:28px 20px;
-  text-align:center;
-  border:1px solid #20b8ff88;
-  border-radius:24px;
-  background:rgba(2,12,23,.94);
-  box-shadow:
-    0 0 50px #008cff22,
-    inset 0 0 40px #008cff0b;
-}
-
-.engine{
-  width:125px;
-  height:125px;
-  border-radius:50%;
-  margin:0 auto 22px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border:2px solid #25bdff;
-  box-shadow:
-    0 0 25px #009dff,
-    0 0 70px #007cff44,
-    inset 0 0 30px #008cff44;
-  animation:pulse 3s infinite;
-}
-
-@keyframes pulse{
-  50%{
+    width:min(850px,96vw);
+    background:rgba(3,16,29,.96);
+    border:1px solid #128dcc;
+    border-radius:26px;
+    padding:30px 20px;
+    text-align:center;
     box-shadow:
-      0 0 40px #00aaff,
-      0 0 100px #007cff66,
-      inset 0 0 50px #008cff55;
-  }
+        0 0 45px rgba(0,150,230,.15),
+        inset 0 0 35px rgba(0,120,190,.04);
 }
 
-.engine-icon{
-  font-size:45px;
+.logo{
+    width:125px;
+    height:125px;
+    margin:auto;
+    border:2px solid #22b9ff;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:48px;
+    box-shadow:0 0 35px rgba(0,174,255,.45);
 }
 
 .system{
-  color:#48caff;
-  font-size:11px;
-  letter-spacing:3px;
-  margin-bottom:12px;
+    margin-top:20px;
+    color:#3fc7ff;
+    font-size:12px;
+    letter-spacing:3px;
 }
 
 h1{
-  font-size:clamp(36px,9vw,65px);
-  margin:8px 0 20px;
-  text-shadow:0 0 25px #009dff;
+    font-size:clamp(38px,9vw,65px);
+    margin:10px 0;
+    text-shadow:0 0 25px rgba(0,170,255,.65);
 }
 
 h2{
-  font-size:clamp(25px,6vw,42px);
-  margin:10px 0 20px;
+    font-size:clamp(27px,7vw,43px);
+    margin:15px 0;
+}
+
+h3{
+    color:#52cfff;
 }
 
 p{
-  font-size:18px;
-  line-height:2;
-  color:#c8e8f5;
+    font-size:18px;
+    line-height:2;
+    color:#c9e8f5;
 }
 
 .warning{
-  color:#ff5c7d;
-  font-weight:bold;
+    color:#ff617f;
 }
 
 .gold{
-  color:#ffd968;
+    color:#ffe083;
 }
 
-.green{
-  color:#42e5a1;
-}
-
-.blue{
-  color:#48caff;
-}
-
-.btn{
-  border:1px solid #25baff;
-  border-radius:12px;
-  padding:14px 28px;
-  background:linear-gradient(#0a4d76,#062237);
-  color:white;
-  font-size:17px;
-  font-weight:bold;
-  cursor:pointer;
-  box-shadow:0 0 20px #008cff22;
-  margin:8px;
-}
-
-.btn:hover{
-  box-shadow:0 0 30px #008cff66;
-  transform:translateY(-2px);
-}
-
-.card{
-  max-width:720px;
-  margin:20px auto;
-  padding:22px;
-  border:1px solid #1d6d91;
-  border-radius:18px;
-  background:#041625;
+.success{
+    color:#55e5a5;
 }
 
 .case{
-  color:#48caff;
-  font-size:14px;
-  letter-spacing:2px;
+    color:#40c8ff;
+    letter-spacing:2px;
+    font-size:13px;
+    margin-bottom:10px;
 }
 
-.suspects{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:12px;
-  margin:25px 0;
+.box{
+    background:#041725;
+    border:1px solid #175978;
+    border-radius:18px;
+    padding:22px;
+    margin:22px auto;
+    max-width:720px;
 }
 
-.suspect{
-  min-width:125px;
-  padding:18px 15px;
-  border-radius:15px;
-  border:1px solid #247ea4;
-  background:#061d30;
-  color:white;
-  font-size:22px;
-  cursor:pointer;
+.sentence{
+    font-size:clamp(30px,8vw,58px);
+    font-weight:bold;
+    margin:25px 0;
+    text-shadow:0 0 20px rgba(0,180,255,.45);
 }
 
-.suspect:hover{
-  border-color:#40c9ff;
-  box-shadow:0 0 22px #008cff44;
+.btn{
+    border:1px solid #20b7ff;
+    background:#062b45;
+    color:#fff;
+    border-radius:13px;
+    padding:14px 25px;
+    font-size:17px;
+    font-weight:bold;
+    margin:7px;
+    cursor:pointer;
+    box-shadow:0 0 18px rgba(0,157,255,.18);
+    transition:.2s;
 }
 
-.clue{
-  min-height:60px;
-  margin:15px 0;
-  font-size:17px;
-  line-height:1.9;
+.btn:hover{
+    background:#084466;
+    box-shadow:0 0 25px rgba(0,174,255,.3);
 }
 
-.word{
-  font-size:clamp(40px,10vw,70px);
-  margin:25px 0;
-  text-shadow:0 0 25px #009dff88;
+.btn:active{
+    transform:scale(.97);
 }
 
-.progress{
-  display:flex;
-  justify-content:center;
-  gap:8px;
-  margin-top:25px;
+.options{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:12px;
+    margin:25px 0;
 }
 
-.dot{
-  width:9px;
-  height:9px;
-  border-radius:50%;
-  background:#16384b;
+.option{
+    background:#061d2e;
+    border:1px solid #216b8c;
+    color:#fff;
+    border-radius:15px;
+    padding:18px 22px;
+    font-size:21px;
+    cursor:pointer;
+    min-width:120px;
+    transition:.2s;
 }
 
-.dot.active{
-  background:#29baff;
-  box-shadow:0 0 12px #29baff;
-}
-
-.evidence-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
-  margin:25px auto;
-  max-width:700px;
-}
-
-.evidence{
-  padding:18px 10px;
-  border:1px solid #205a76;
-  border-radius:14px;
-  background:#061a2b;
-}
-
-.evidence strong{
-  display:block;
-  color:#48caff;
-  margin-bottom:8px;
-}
-
-.lock{
-  width:155px;
-  height:155px;
-  border-radius:50%;
-  margin:25px auto;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:58px;
-  border:2px solid #168fd0;
-  box-shadow:0 0 35px #008cff33;
-}
-
-input{
-  width:210px;
-  padding:14px;
-  text-align:center;
-  font-size:20px;
-  background:#020b14;
-  color:white;
-  border:1px solid #269bc8;
-  border-radius:10px;
-  outline:none;
+.option:hover{
+    border-color:#35c5ff;
+    box-shadow:0 0 20px rgba(0,180,255,.3);
 }
 
 .message{
-  min-height:55px;
-  margin:15px auto;
-  max-width:650px;
-  line-height:1.9;
+    min-height:55px;
+    font-size:17px;
+    line-height:1.9;
 }
 
-.signature{
-  margin-top:28px;
-  color:#7898a9;
-  font-size:13px;
-  line-height:1.9;
+.evidence-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin:25px 0;
 }
 
-.signature strong{
-  color:#bceaff;
+.evidence-card{
+    padding:20px 12px;
+    border:1px solid #185674;
+    border-radius:15px;
+    background:#051b2b;
+}
+
+.lock{
+    font-size:75px;
+    margin:20px;
+    filter:drop-shadow(0 0 15px rgba(0,180,255,.5));
+}
+
+input{
+    background:#020a12;
+    color:#fff;
+    border:1px solid #20a9dc;
+    border-radius:10px;
+    padding:14px;
+    font-size:20px;
+    text-align:center;
+    width:min(250px,80vw);
+    outline:none;
+}
+
+input:focus{
+    box-shadow:0 0 18px rgba(0,180,255,.25);
+}
+
+.guide-card{
+    background:
+        linear-gradient(145deg,rgba(4,28,46,.98),rgba(2,13,24,.98));
+    border:1px solid #17648a;
+    border-radius:18px;
+    padding:20px;
+    margin:15px auto;
+    text-align:right;
+    max-width:700px;
+}
+
+.guide-title{
+    color:#49caff;
+    font-size:20px;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+.hint{
+    display:none;
+    margin-top:14px;
+    padding:15px;
+    border-right:3px solid #27baff;
+    background:rgba(0,120,180,.08);
+    line-height:1.9;
+    color:#cbeefa;
+}
+
+.hint.show{
+    display:block;
+    animation:fadeIn .3s ease;
 }
 
 .secret{
-  font-size:clamp(30px,7vw,52px);
-  text-shadow:0 0 25px #20baff;
+    border-color:#3bc8ff;
+    box-shadow:0 0 20px rgba(0,170,255,.08);
 }
+
+.signature{
+    margin-top:30px;
+    font-size:13px;
+    color:#7192a4;
+    line-height:2;
+}
+
+.signature strong{
+    color:#c4efff;
+}
+
+.small{
+    font-size:14px;
+    color:#8eb2c3;
+}
+
+.divider{
+    width:70%;
+    height:1px;
+    background:linear-gradient(90deg,transparent,#168ec4,transparent);
+    margin:25px auto;
+}
+
+.footer-code{
+    color:#47778e;
+    font-size:11px;
+    letter-spacing:2px;
+    margin-top:20px;
+}
+
+@media(max-width:520px){
+
+    .panel{
+        padding:24px 13px;
+    }
+
+    .evidence-grid{
+        grid-template-columns:1fr;
+    }
+
+    .option{
+        width:100%;
+    }
+
+    .sentence{
+        font-size:34px;
+    }
+}
+
 </style>
 </head>
 
 <body>
 
-<!-- ================= البداية ================= -->
 
-<section id="start" class="screen active">
-  <div class="panel">
+<!-- =========================
+     الصفحة 1
+========================= -->
 
-    <div class="engine">
-      <div class="engine-icon">🧠</div>
+<section id="home" class="screen active">
+
+<div class="panel">
+
+    <div class="logo">🧠</div>
+
+    <div class="system">
+        LANGUAGE ENGINE 001
     </div>
-
-    <div class="system">LANGUAGE ENGINE // 001</div>
 
     <h1>مُحَرِّك اللغة 001</h1>
 
     <p>
-      تم تشغيل النظام...
-      <br>
-      لكن تم اكتشاف اضطراب داخل شبكة الجمل.
+        تم تشغيل النظام...
     </p>
 
     <p class="warning">
-      ⚠️ البلاغ النحوي الأول وصل الآن.
+        ⚠️ لكن تم اكتشاف اضطراب داخل شبكة الجمل.
     </p>
 
-    <button class="btn" onclick="showScreen('briefing')">
-      🔵 فتح ملف القضية
+    <div class="box">
+
+        <p class="gold">
+            ⚠️ البلاغ النحوي الأول وصل الآن.
+        </p>
+
+    </div>
+
+    <button class="btn" onclick="go('brief')">
+        🔵 فتح ملف القضية
     </button>
 
     <div class="signature">
-      ابتكار وتطوير<br>
-      <strong>الأستاذة شهد سعد عودة</strong>
-      <br><br>
-      «مش بنحفظ اللغة... إحنا بنشغّلها.»
+        ابتكار وتطوير<br>
+        <strong>الأستاذة شهد سعد عودة</strong>
+        <br><br>
+        «مش بنحفظ اللغة... إحنا بنشغّلها.»
     </div>
 
-  </div>
+</div>
+
 </section>
 
 
-<!-- ================= البلاغ ================= -->
+<!-- =========================
+     الصفحة 2
+========================= -->
 
-<section id="briefing" class="screen">
-  <div class="panel">
+<section id="brief" class="screen">
 
-    <div class="case">CASE 001 // CLASSIFIED</div>
+<div class="panel">
 
-    <h2>🕵️‍♀️ مَن فعلها؟</h2>
+    <div class="case">
+        CASE 001
+    </div>
 
-    <div class="card">
+    <h2>مَن فعلها؟</h2>
 
-      <p>
-        حدث خلل داخل شبكة الجمل.
-      </p>
+    <div class="box">
 
-      <p>
-        الكلمات ما زالت موجودة...
-        <br>
-        لكن وظائفها أصبحت غير واضحة.
-      </p>
+        <p>
+            حدث خلل داخل شبكة الجمل.
+        </p>
 
-      <p class="gold">
-        هناك شخص قام بالفعل.
-        <br>
-        مهمتك أن تكتشف هويته.
-      </p>
+        <p>
+            الكلمات ما زالت موجودة...
+            <br>
+            لكن وظائفها أصبحت غير واضحة.
+        </p>
+
+        <p class="gold">
+            هناك شخص قام بالفعل.
+            <br>
+            مهمتك أن تكتشف هويته.
+        </p>
 
     </div>
 
-    <button class="btn" onclick="showScreen('case1')">
-      بدء التحقيق 🔍
+    <button class="btn" onclick="go('case1')">
+        بدء التحقيق 🔍
     </button>
 
-  </div>
+    <button class="btn" onclick="go('guide')">
+        🗂️ ملف المحقق
+    </button>
+
+</div>
+
 </section>
 
 
-<!-- ================= القضية الأولى ================= -->
+<!-- =========================
+     الصفحة 3
+========================= -->
 
 <section id="case1" class="screen">
-  <div class="panel">
 
-    <div class="case">CASE 001 // EVIDENCE 01</div>
+<div class="panel">
+
+    <div class="case">
+        EVIDENCE 01
+    </div>
 
     <h2>الجملة الأولى</h2>
 
     <p>
-      اقرأ الجملة جيدًا:
+        اقرأ الجملة جيدًا:
     </p>
 
-    <div class="word">
-      كتبَ سامرٌ الدرسَ.
+    <div class="sentence">
+        كتبَ سامرٌ الدرسَ.
     </div>
 
-    <div class="card">
-
-      <p class="gold">
+    <p class="gold">
         🔍 لدينا ثلاثة مشتبه بهم.
-      </p>
+    </p>
 
-      <p>
+    <p>
         من الشخص الذي قام بالفعل؟
-      </p>
+    </p>
 
-      <div class="suspects">
+    <div class="options">
 
-        <button class="suspect" onclick="checkCase1('كتبَ')">
-          كتبَ
+        <button class="option" onclick="answerCase1('كتبَ')">
+            كتبَ
         </button>
 
-        <button class="suspect" onclick="checkCase1('سامرٌ')">
-          سامرٌ
+        <button class="option" onclick="answerCase1('سامرٌ')">
+            سامرٌ
         </button>
 
-        <button class="suspect" onclick="checkCase1('الدرسَ')">
-          الدرسَ
+        <button class="option" onclick="answerCase1('الدرسَ')">
+            الدرسَ
         </button>
-
-      </div>
-
-      <div id="case1Message" class="message"></div>
 
     </div>
 
-    <div class="progress">
-      <span class="dot active"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-    </div>
+    <div id="case1Message" class="message"></div>
 
-  </div>
+</div>
+
 </section>
 
 
-<!-- ================= دليل الفاعل ================= -->
+<!-- =========================
+     الصفحة 4
+========================= -->
 
 <section id="evidence1" class="screen">
-  <div class="panel">
 
-    <div class="engine">
-      <div class="engine-icon">🔓</div>
+<div class="panel">
+
+    <div class="case">
+        EVIDENCE FOUND
     </div>
 
-    <div class="case">EVIDENCE FOUND</div>
+    <h2>🔓 تم اكتشاف أول دليل</h2>
 
-    <h2>تم اكتشاف أول دليل</h2>
-
-    <div class="card">
-
-      <p>
+    <p class="success">
         أنت لم تحفظ الإجابة...
-      </p>
-
-      <p class="green">
-        أنت اكتشفت من قام بالفعل.
-      </p>
-
-      <hr style="border-color:#17475e">
-
-      <p>
-        <span class="blue">الدليل 01</span>
-        <br><br>
-        من قام بالفعل في الجملة
         <br>
-        هو <strong>الفاعل</strong>.
-      </p>
+        أنت اكتشفت من قام بالفعل.
+    </p>
+
+    <div class="box">
+
+        <h3>الدليل 01</h3>
+
+        <p>
+            من قام بالفعل في الجملة
+            <br>
+            <strong class="gold">هو الفاعل.</strong>
+        </p>
 
     </div>
 
-    <button class="btn" onclick="showScreen('case2')">
-      متابعة التحقيق ←
+    <button class="btn" onclick="go('case2')">
+        متابعة التحقيق ←
     </button>
 
-  </div>
+</div>
+
 </section>
 
 
-<!-- ================= القضية الثانية ================= -->
+<!-- =========================
+     الصفحة 5
+========================= -->
 
 <section id="case2" class="screen">
-  <div class="panel">
 
-    <div class="case">CASE 001 // EVIDENCE 02</div>
+<div class="panel">
+
+    <div class="case">
+        EVIDENCE 02
+    </div>
 
     <h2>ظهور مشتبه جديد</h2>
 
-    <div class="word">
-      ركلَ اللاعبُ الكرةَ.
+    <div class="sentence">
+        ركلَ اللاعبُ الكرةَ.
     </div>
 
-    <div class="card">
-
-      <p>
+    <p>
         اللاعبُ قام بالفعل.
-      </p>
+    </p>
 
-      <p class="gold">
-        لكن ماذا حدث للكرة؟
-      </p>
+    <div class="box">
 
-      <div class="suspects">
+        <p class="gold">
+            لكن ماذا حدث للكرة؟
+        </p>
 
-        <button class="suspect" onclick="checkCase2('اللاعب')">
-          اللاعبُ
-        </button>
+        <p>
+            راجع ما حدث لكل كلمة.
+        </p>
 
-        <button class="suspect" onclick="checkCase2('الكرة')">
-          الكرةَ
-        </button>
-
-        <button class="suspect" onclick="checkCase2('ركل')">
-          ركلَ
-        </button>
-
-      </div>
-
-      <div id="case2Message" class="message"></div>
+        <p>
+            <strong>
+                ما الكلمة التي وقع عليها الفعل؟
+            </strong>
+        </p>
 
     </div>
 
-  </div>
+    <div class="options">
+
+        <button class="option" onclick="answerCase2('اللاعبُ')">
+            اللاعبُ
+        </button>
+
+        <button class="option" onclick="answerCase2('الكرةَ')">
+            الكرةَ
+        </button>
+
+        <button class="option" onclick="answerCase2('ركلَ')">
+            ركلَ
+        </button>
+
+    </div>
+
+    <div id="case2Message" class="message"></div>
+
+</div>
+
 </section>
 
 
-<!-- ================= دليل المفعول ================= -->
+<!-- =========================
+     الصفحة 6
+========================= -->
 
 <section id="evidence2" class="screen">
-  <div class="panel">
 
-    <div class="engine">
-      <div class="engine-icon">🧩</div>
+<div class="panel">
+
+    <div class="case">
+        EVIDENCE 02 FOUND
     </div>
 
-    <div class="case">EVIDENCE 02 FOUND</div>
+    <h2>اكتشاف صحيح.</h2>
 
-    <h2>دليل جديد</h2>
+    <div class="box">
 
-    <div class="card">
+        <p>
+            الكرة لم تقم بالفعل،
+        </p>
 
-      <p>
-        الكرة لم تقم بالفعل.
-      </p>
+        <p class="gold">
+            بل وقع عليها الفعل.
+        </p>
 
-      <p>
-        بل وقع عليها الفعل.
-      </p>
+        <div class="divider"></div>
 
-      <p class="green">
-        إذن لدينا وظيفة نحوية جديدة:
-      </p>
+        <p>
+            إذن لدينا وظيفة نحوية جديدة:
+        </p>
 
-      <h2 class="blue">المفعول به</h2>
+        <h2 class="success">
+            المفعول به
+        </h2>
 
-      <p>
-        هو الذي وقع عليه الفعل.
-      </p>
+        <p>
+            هو الذي وقع عليه الفعل.
+        </p>
 
     </div>
 
-    <button class="btn" onclick="showScreen('case3')">
-      القضية التالية ←
+    <button class="btn" onclick="go('case3')">
+        القضية التالية ←
     </button>
 
-  </div>
+</div>
+
 </section>
 
 
-<!-- ================= الفخ ================= -->
+<!-- =========================
+     الصفحة 7
+========================= -->
 
 <section id="case3" class="screen">
-  <div class="panel">
 
-    <div class="case">CASE 001 // TRAP</div>
+<div class="panel">
+
+    <div class="case">
+        TRAP DETECTED
+    </div>
 
     <h2>⚠️ فخ نحوي</h2>
 
     <p>
-      هذه المرة تغيّر ترتيب الكلمات.
+        هذه المرة تغيّر ترتيب الكلمات.
     </p>
 
-    <div class="word">
-      الكرةَ ركلَ اللاعبُ.
+    <div class="sentence">
+        الكرةَ ركلَ اللاعبُ.
     </div>
 
-    <div class="card">
+    <div class="box">
 
-      <p class="gold">
-        لا تعتمد على مكان الكلمة.
-      </p>
+        <p class="warning">
+            لا تعتمد على مكان الكلمة.
+        </p>
 
-      <p>
-        من قام بالفعل؟
-      </p>
-
-      <div class="suspects">
-
-        <button class="suspect" onclick="checkCase3('الكرة')">
-          الكرةَ
-        </button>
-
-        <button class="suspect" onclick="checkCase3('اللاعب')">
-          اللاعبُ
-        </button>
-
-        <button class="suspect" onclick="checkCase3('ركل')">
-          ركلَ
-        </button>
-
-      </div>
-
-      <div id="case3Message" class="message"></div>
+        <p class="gold">
+            من قام بالفعل؟
+        </p>
 
     </div>
 
-  </div>
+    <div class="options">
+
+        <button class="option" onclick="answerCase3('الكرةَ')">
+            الكرةَ
+        </button>
+
+        <button class="option" onclick="answerCase3('اللاعبُ')">
+            اللاعبُ
+        </button>
+
+        <button class="option" onclick="answerCase3('ركلَ')">
+            ركلَ
+        </button>
+
+    </div>
+
+    <div id="case3Message" class="message"></div>
+
+</div>
+
 </section>
 
 
-<!-- ================= لوحة الأدلة ================= -->
+<!-- =========================
+     الصفحة 8
+========================= -->
 
-<section id="evidenceBoard" class="screen">
-  <div class="panel">
+<section id="evidence3" class="screen">
 
-    <div class="case">INVESTIGATION DATABASE</div>
+<div class="panel">
 
-    <h2>🗂 ملف الأدلة</h2>
+    <div class="case">
+        EVIDENCE 03 FOUND
+    </div>
+
+    <h2>⚡ أحسنت.</h2>
+
+    <div class="box">
+
+        <p>
+            اللاعب هو الفاعل
+            <br>
+            رغم أن الجملة غيّرت ترتيبها.
+        </p>
+
+        <p class="gold">
+            ترتيب الكلمات وحده لا يكفي.
+        </p>
+
+    </div>
+
+    <button class="btn" onclick="go('evidenceFile')">
+        🗂️ فتح ملف الأدلة
+    </button>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     ملف الأدلة
+========================= -->
+
+<section id="evidenceFile" class="screen">
+
+<div class="panel">
+
+    <div class="case">
+        EVIDENCE FILE
+    </div>
+
+    <h2>🗂️ ملف الأدلة</h2>
 
     <p>
-      تم جمع الأدلة الأساسية للقضية.
+        تم جمع الأدلة الأساسية للقضية.
     </p>
 
     <div class="evidence-grid">
 
-      <div class="evidence">
-        <strong>الدليل 01</strong>
-        من قام بالفعل = الفاعل
-      </div>
+        <div class="evidence-card">
+            <strong class="gold">
+                الدليل 01
+            </strong>
+            <p>
+                من قام بالفعل = الفاعل
+            </p>
+        </div>
 
-      <div class="evidence">
-        <strong>الدليل 02</strong>
-        من وقع عليه الفعل = المفعول به
-      </div>
+        <div class="evidence-card">
+            <strong class="gold">
+                الدليل 02
+            </strong>
+            <p>
+                من وقع عليه الفعل = المفعول به
+            </p>
+        </div>
 
-      <div class="evidence">
-        <strong>الدليل 03</strong>
-        ترتيب الكلمات وحده لا يكفي.
-      </div>
+        <div class="evidence-card">
+            <strong class="gold">
+                الدليل 03
+            </strong>
+            <p>
+                ترتيب الكلمات وحده لا يكفي.
+            </p>
+        </div>
 
-      <div class="evidence" style="opacity:.4">
-        <strong>الدليل 04</strong>
-        🔒 الحركة الإعرابية
-      </div>
+        <div class="evidence-card">
+            <strong class="gold">
+                الدليل 04
+            </strong>
+            <p>
+                🔒 الحركة الإعرابية
+            </p>
+        </div>
 
     </div>
 
-    <button class="btn" onclick="showScreen('lock')">
-      🔐 الوصول إلى القفل
+    <button class="btn" onclick="go('lock')">
+        🔐 الوصول إلى القفل
     </button>
 
-  </div>
+</div>
+
 </section>
 
 
-<!-- ================= القفل ================= -->
+<!-- =========================
+     ملف المحقق
+========================= -->
 
-<section id="lock" class="screen">
-  <div class="panel">
+<section id="guide" class="screen">
 
-    <div class="case">SECURITY GATE</div>
+<div class="panel">
 
-    <h2>🔐 قفل القضية</h2>
-
-    <div class="lock">
-      🔒
+    <div class="case">
+        SECRET INVESTIGATOR FILE / 001
     </div>
 
-    <p>
-      النظام يطلب كلمة السر.
-      <br>
-      استخدم أول وظيفة نحوية اكتشفتها.
+    <div class="lock">
+        🗂️
+    </div>
+
+    <h2>ملف المحقق</h2>
+
+    <p class="warning">
+        ⚠️ هذا الملف لا يُفتح إلا عند الحاجة.
     </p>
 
-    <input id="code" type="text" placeholder="اكتب الرمز">
+    <p>
+        إذا كنت ما زلت قادرًا على حل القضية بنفسك،
+        أغلق الملف الآن.
+    </p>
+
+    <p class="gold">
+        إذا احتجت مساعدة...
+        <br>
+        ابدأ بالتلميح الأول فقط.
+    </p>
+
+    <div class="divider"></div>
+
+
+    <!-- تلميح القضية الأولى -->
+
+    <div class="guide-card">
+
+        <div class="guide-title">
+            🔎 القضية: مَن فعلها؟
+        </div>
+
+        <p>
+            التلميح الأول:
+        </p>
+
+        <button class="btn" onclick="toggleHint('hint1')">
+            إظهار التلميح
+        </button>
+
+        <div id="hint1" class="hint">
+            اسأل نفسك:
+            <br><br>
+            <strong>
+                مَن قام بالفعل؟
+            </strong>
+            <br><br>
+            لا تبحث عن الكلمة في مكان معين،
+            بل ابحث عن الشخص الذي نفّذ الفعل.
+        </div>
+
+    </div>
+
+
+    <!-- تلميح ثاني -->
+
+    <div class="guide-card">
+
+        <div class="guide-title">
+            🔎 تلميح إضافي
+        </div>
+
+        <button class="btn" onclick="toggleHint('hint2')">
+            إظهار التلميح الثاني
+        </button>
+
+        <div id="hint2" class="hint">
+            في الجملة:
+            <br><br>
+            <strong>
+                كتبَ سامرٌ الدرسَ.
+            </strong>
+            <br><br>
+            من الذي قام بالكتابة؟
+        </div>
+
+    </div>
+
+
+    <!-- الحل -->
+
+    <div class="guide-card secret">
+
+        <div class="guide-title">
+            🔐 الحل
+        </div>
+
+        <button class="btn" onclick="toggleHint('solution1')">
+            إظهار الحل
+        </button>
+
+        <div id="solution1" class="hint">
+            <strong class="success">
+                سامرٌ
+            </strong>
+            <br><br>
+            إذن:
+            <br>
+            <strong class="gold">
+                سامرٌ = الفاعل
+            </strong>
+        </div>
+
+    </div>
+
+
+    <!-- قضية المفعول به -->
+
+    <div class="guide-card">
+
+        <div class="guide-title">
+            🧩 دليل المفعول به
+        </div>
+
+        <p>
+            في:
+            <br>
+            <strong>
+                ركلَ اللاعبُ الكرةَ.
+            </strong>
+        </p>
+
+        <button class="btn" onclick="toggleHint('hint3')">
+            إظهار التلميح
+        </button>
+
+        <div id="hint3" class="hint">
+            الكرة لم تقم بالفعل.
+            <br><br>
+            اسأل:
+            <br>
+            <strong>
+                على مَن وقع الفعل؟
+            </strong>
+        </div>
+
+    </div>
+
+
+    <div class="guide-card secret">
+
+        <div class="guide-title">
+            🔐 الحل
+        </div>
+
+        <button class="btn" onclick="toggleHint('solution2')">
+            إظهار الحل
+        </button>
+
+        <div id="solution2" class="hint">
+            <strong class="success">
+                الكرةَ
+            </strong>
+            <br><br>
+            هي التي وقع عليها الفعل.
+            <br>
+            إذن:
+            <br>
+            <strong class="gold">
+                الكرةَ = المفعول به
+            </strong>
+        </div>
+
+    </div>
+
+
+    <!-- فخ ترتيب الكلمات -->
+
+    <div class="guide-card">
+
+        <div class="guide-title">
+            ⚠️ فخ ترتيب الكلمات
+        </div>
+
+        <p>
+            في:
+            <br>
+            <strong>
+                الكرةَ ركلَ اللاعبُ.
+            </strong>
+        </p>
+
+        <button class="btn" onclick="toggleHint('hint4')">
+            إظهار التلميح
+        </button>
+
+        <div id="hint4" class="hint">
+            لا تجعل أول كلمة تخدعك.
+            <br><br>
+            ابحث عن الشخص الذي قام بالفعل:
+            <br>
+            <strong>
+                ركلَ
+            </strong>
+        </div>
+
+    </div>
+
+
+    <div class="guide-card secret">
+
+        <div class="guide-title">
+            🔐 الحل
+        </div>
+
+        <button class="btn" onclick="toggleHint('solution3')">
+            إظهار الحل
+        </button>
+
+        <div id="solution3" class="hint">
+            <strong class="success">
+                اللاعبُ
+            </strong>
+            هو الفاعل.
+            <br><br>
+            لأن ترتيب الكلمات لا يحدد الوظيفة النحوية وحده.
+        </div>
+
+    </div>
+
+
+    <button class="btn" onclick="go('brief')">
+        ← العودة للقضية
+    </button>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     القفل
+========================= -->
+
+<section id="lock" class="screen">
+
+<div class="panel">
+
+    <div class="case">
+        FINAL LOCK
+    </div>
+
+    <div class="lock">
+        🔒
+    </div>
+
+    <h2>قفل القضية</h2>
+
+    <div class="box">
+
+        <p>
+            النظام يطلب كلمة السر.
+        </p>
+
+        <p class="gold">
+            استخدم أول وظيفة نحوية اكتشفتها.
+        </p>
+
+    </div>
+
+    <input
+        id="password"
+        type="text"
+        placeholder="اكتب كلمة السر"
+        autocomplete="off"
+    >
 
     <br>
 
     <button class="btn" onclick="unlockCase()">
-      فتح القفل
+        فتح القفل 🔓
     </button>
 
     <div id="lockMessage" class="message"></div>
 
-  </div>
+</div>
+
 </section>
 
 
-<!-- ================= النهاية ================= -->
+<!-- =========================
+     النهاية
+========================= -->
 
 <section id="ending" class="screen">
-  <div class="panel">
 
-    <div class="engine">
-      <div class="engine-icon">⚡</div>
+<div class="panel">
+
+    <div class="case">
+        SECRET FILE UNLOCKED
     </div>
 
-    <div class="case">CASE 001 // CLOSED</div>
-
-    <h2 class="green">تم حل القضية</h2>
-
-    <div class="card">
-
-      <p>
-        تم تحديد الفاعل.
-      </p>
-
-      <p>
-        تم اكتشاف المفعول به.
-      </p>
-
-      <p>
-        وتم اكتشاف أن ترتيب الكلمات ليس كل شيء.
-      </p>
-
+    <div class="lock">
+        🔓
     </div>
 
-    <p class="gold">
-      لكن...
+    <h2 class="success">
+        تم فتح القفل.
+    </h2>
+
+    <p>
+        تم التحقق من الأدلة.
     </p>
+
+    <div class="box">
+
+        <h2 class="gold">
+            ⚡ فتح الملف السري
+        </h2>
+
+        <p class="success">
+            تم حل القضية.
+        </p>
+
+        <p>
+            تم تحديد الفاعل.
+        </p>
+
+        <p>
+            تم اكتشاف المفعول به.
+        </p>
+
+        <p>
+            وتم اكتشاف أن ترتيب الكلمات ليس كل شيء.
+        </p>
+
+    </div>
+
+    <div class="divider"></div>
 
     <p class="warning">
-      ⚠️ تم اكتشاف ملف نحوي سري.
+        ⚠️ تم اكتشاف ملف نحوي سري.
     </p>
 
-    <div class="card">
+    <div class="box">
 
-      <p>
-        القضية القادمة:
-      </p>
+        <p>
+            القضية القادمة:
+        </p>
 
-      <h2 class="blue">
-        لماذا تغيّرت نهاية الكلمة؟
-      </h2>
+        <h2>
+            لماذا تغيّرت نهاية الكلمة؟
+        </h2>
 
-      <p>
-        <strong>CASE 002</strong>
-      </p>
+        <p class="case">
+            CASE 002
+        </p>
 
     </div>
 
     <div class="signature">
-      ابتكار وتطوير<br>
-      <strong>الأستاذة شهد سعد عودة</strong>
-      <br><br>
-      «مش بنحفظ اللغة... إحنا بنشغّلها.»
+        ابتكار وتطوير<br>
+        <strong>الأستاذة شهد سعد عودة</strong>
+        <br><br>
+        «مش بنحفظ اللغة... إحنا بنشغّلها.»
     </div>
 
-    <br>
-
     <button class="btn" onclick="location.reload()">
-      🔄 إعادة التحقيق
+        🔄 إعادة التحقيق
     </button>
 
-  </div>
+</div>
+
 </section>
 
 
 <script>
 
-function showScreen(id){
-  document.querySelectorAll(".screen").forEach(function(screen){
-    screen.classList.remove("active");
-  });
+/* =========================
+   التنقل بين الصفحات
+========================= */
 
-  var target=document.getElementById(id);
+function go(id){
 
-  if(target){
-    target.classList.add("active");
-    window.scrollTo(0,0);
-  }
+    document.querySelectorAll('.screen').forEach(function(screen){
+        screen.classList.remove('active');
+    });
+
+    const target = document.getElementById(id);
+
+    if(target){
+        target.classList.add('active');
+        window.scrollTo({
+            top:0,
+            behavior:'smooth'
+        });
+    }
 }
 
 
-/* القضية الأولى */
+/* =========================
+   القضية الأولى
+========================= */
 
-function checkCase1(answer){
+function answerCase1(answer){
 
-  var message=document.getElementById("case1Message");
+    const message = document.getElementById('case1Message');
 
-  if(answer==="سامرٌ"){
+    if(answer === 'سامرٌ'){
 
-    message.className="message green";
+        message.innerHTML =
+            '<span class="success">⚡ اكتشاف صحيح.</span><br>سامرٌ هو الذي قام بالفعل.';
 
-    message.innerHTML=
-      "🟢 تطابق قوي.<br><br>"+
-      "سامر هو الذي قام بالفعل.<br><br>"+
-      "<button class='btn' onclick=\"showScreen('evidence1')\">🔓 تسجيل الدليل</button>";
+        setTimeout(function(){
+            go('evidence1');
+        },1200);
 
-  }else{
+    }else{
 
-    message.className="message gold";
+        message.innerHTML =
+            '<span class="warning">ليس بهذه السرعة... 🔍</span><br>اسأل نفسك: من قام بالفعل؟';
 
-    message.innerHTML=
-      "الإشارة غير مكتملة...<br>"+
-      "اسأل نفسك: <strong>من الذي قام بالفعل؟</strong>";
-
-  }
+    }
 }
 
 
-/* القضية الثانية */
+/* =========================
+   القضية الثانية
+========================= */
 
-function checkCase2(answer){
+function answerCase2(answer){
 
-  var message=document.getElementById("case2Message");
+    const message = document.getElementById('case2Message');
 
-  if(answer==="الكرة"){
+    if(answer === 'الكرةَ'){
 
-    message.className="message green";
+        message.innerHTML =
+            '<span class="success">🔓 اكتشاف صحيح.</span><br>الكرةَ هي التي وقع عليها الفعل.';
 
-    message.innerHTML=
-      "🟢 اكتشاف صحيح.<br><br>"+
-      "الكرة لم تقم بالفعل، بل وقع عليها الفعل.<br><br>"+
-      "<button class='btn' onclick=\"showScreen('evidence2')\">🔓 حفظ الدليل</button>";
+        setTimeout(function(){
+            go('evidence2');
+        },1200);
 
-  }else{
+    }else{
 
-    message.className="message gold";
+        message.innerHTML =
+            '<span class="warning">راجع ما حدث لكل كلمة.</span><br>السؤال هو: ما الكلمة التي وقع عليها الفعل؟';
 
-    message.innerHTML=
-      "راجع ما حدث لكل كلمة.<br>"+
-      "من قام بالفعل؟ ومن وقع عليه الفعل؟";
-
-  }
+    }
 }
 
 
-/* الفخ */
+/* =========================
+   الفخ النحوي
+========================= */
 
-function checkCase3(answer){
+function answerCase3(answer){
 
-  var message=document.getElementById("case3Message");
+    const message = document.getElementById('case3Message');
 
-  if(answer==="اللاعب"){
+    if(answer === 'اللاعبُ'){
 
-    message.className="message green";
+        message.innerHTML =
+            '<span class="success">⚡ أحسنت.</span><br>اللاعبُ هو الفاعل رغم تغيّر ترتيب الكلمات.';
 
-    message.innerHTML=
-      "⚡ أحسنت.<br><br>"+
-      "اللاعب هو الفاعل رغم أن الجملة تغيّر ترتيبها.<br><br>"+
-      "<button class='btn' onclick=\"showScreen('evidenceBoard')\">🗂 فتح ملف الأدلة</button>";
+        setTimeout(function(){
+            go('evidence3');
+        },1300);
 
-  }else{
+    }else{
 
-    message.className="message gold";
+        message.innerHTML =
+            '<span class="warning">لا تعتمد على ترتيب الكلمات.</span><br>اسأل: من قام بالفعل؟';
 
-    message.innerHTML=
-      "لا تعتمد على أول كلمة.<br>"+
-      "ابحث عن الشخص الذي قام بالفعل.";
-
-  }
+    }
 }
 
 
-/* القفل */
+/* =========================
+   فتح القفل
+========================= */
 
 function unlockCase(){
 
-  var code=document.getElementById("code").value.trim();
-  var message=document.getElementById("lockMessage");
+    const input = document.getElementById('password');
+    const message = document.getElementById('lockMessage');
 
-  if(code==="الفاعل"){
+    const value = input.value.trim();
 
-    message.className="message green";
+    if(value === 'الفاعل'){
 
-    message.innerHTML=
-      "🔓 تم فتح القفل.<br><br>"+
-      "تم التحقق من الأدلة.<br><br>"+
-      "<button class='btn' onclick=\"showScreen('ending')\">⚡ فتح الملف السري</button>";
+        message.innerHTML =
+            '<span class="success">🔓 تم التحقق من كلمة السر.</span>';
 
-  }else{
+        setTimeout(function(){
+            go('ending');
+        },900);
 
-    message.className="message gold";
+    }else{
 
-    message.innerHTML=
-      "الرمز غير صحيح.<br>"+
-      "تذكّر أول وظيفة نحوية اكتشفتها.";
+        message.innerHTML =
+            '<span class="warning">🔒 كلمة السر غير صحيحة.</span><br>ارجع إلى أول دليل في القضية.';
 
-  }
+    }
 }
+
+
+/* =========================
+   إظهار التلميحات
+========================= */
+
+function toggleHint(id){
+
+    const element = document.getElementById(id);
+
+    if(element){
+        element.classList.toggle('show');
+    }
+}
+
+
+/* =========================
+   الضغط على Enter في القفل
+========================= */
+
+document.addEventListener('DOMContentLoaded', function(){
+
+    const password = document.getElementById('password');
+
+    if(password){
+
+        password.addEventListener('keydown', function(event){
+
+            if(event.key === 'Enter'){
+                unlockCase();
+            }
+
+        });
+
+    }
+
+});
 
 </script>
 
