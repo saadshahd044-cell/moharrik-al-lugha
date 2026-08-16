@@ -1,332 +1,956 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>لغز الأستاذة شهد عودة</title>
+<title>مُحَرِّك اللغة | الأستاذة شهد سعد عودة</title>
 
 <style>
-* {
-  box-sizing: border-box;
+
+*{
+  box-sizing:border-box;
 }
 
-body {
-  margin: 0;
-  min-height: 100vh;
-  font-family: Tahoma, Arial, sans-serif;
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:Tahoma,Arial,sans-serif;
   background:
-    radial-gradient(circle at 15% 15%, #dff7ff 0 10%, transparent 25%),
-    radial-gradient(circle at 85% 85%, #e4dcff 0 10%, transparent 25%),
-    linear-gradient(135deg, #f7fbff, #eef4ff);
-  color: #18243a;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 18px;
+    radial-gradient(circle at 10% 10%,#dff6ff 0 8%,transparent 22%),
+    radial-gradient(circle at 90% 85%,#e9e1ff 0 8%,transparent 22%),
+    linear-gradient(135deg,#f5fbff,#f7f3ff);
+  color:#20324a;
 }
 
-.game {
-  width: 100%;
-  max-width: 620px;
-  background: rgba(255,255,255,0.95);
-  border-radius: 30px;
-  padding: 24px;
-  box-shadow: 0 20px 60px rgba(38,71,120,0.18);
-  border: 1px solid #e5edfa;
-  text-align: center;
+button{
+  font-family:inherit;
 }
 
-.badge {
-  display: inline-block;
-  background: #e9f5ff;
-  color: #1673b8;
-  padding: 8px 16px;
-  border-radius: 30px;
-  font-size: 14px;
-  font-weight: bold;
+.app{
+  width:100%;
+  max-width:760px;
+  margin:auto;
+  padding:18px;
 }
 
-h1 {
-  margin: 14px 0 5px;
-  font-size: 30px;
-  color: #1769aa;
+
+/* =========================
+   HEADER
+========================= */
+
+.header{
+  background:rgba(255,255,255,.96);
+  border-radius:30px;
+  padding:24px 18px;
+  text-align:center;
+  box-shadow:0 15px 45px rgba(39,78,125,.15);
+  border:1px solid #e5eef8;
 }
 
-.subtitle {
-  margin: 0 0 20px;
-  color: #66758c;
+.logo{
+  width:85px;
+  height:85px;
+  margin:auto;
+  border-radius:27px;
+  background:linear-gradient(145deg,#159ee8,#1455b8);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:45px;
+  box-shadow:0 10px 25px rgba(15,91,170,.25);
 }
 
-.cup {
-  width: 120px;
-  height: 120px;
-  margin: 15px auto 22px;
-  border-radius: 50%;
-  background: linear-gradient(145deg, #149bea, #0755b8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 62px;
-  box-shadow:
-    0 15px 25px rgba(10,91,177,0.28),
-    inset 0 4px 10px rgba(255,255,255,0.3);
-  animation: float 2.5s ease-in-out infinite;
+h1{
+  margin:14px 0 5px;
+  color:#145fa0;
+  font-size:30px;
 }
 
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-8px);
-  }
+.tagline{
+  color:#66758a;
+  margin:0;
+  font-size:16px;
 }
 
-.card {
-  background: #f7faff;
-  border: 2px dashed #c7dcf4;
-  border-radius: 22px;
-  padding: 20px;
-  margin: 15px 0;
+.creator{
+  margin-top:14px;
+  color:#176fa9;
+  font-weight:bold;
+  font-size:14px;
 }
 
-.question {
-  font-size: 21px;
-  line-height: 1.8;
-  font-weight: bold;
+
+/* =========================
+   MAP
+========================= */
+
+.map{
+  margin-top:18px;
+  background:rgba(255,255,255,.96);
+  border-radius:28px;
+  padding:24px 18px;
+  box-shadow:0 15px 40px rgba(39,78,125,.12);
 }
 
-input {
-  width: 100%;
-  padding: 15px;
-  border: 2px solid #d5e4f5;
-  border-radius: 15px;
-  font-size: 18px;
-  text-align: center;
-  outline: none;
-  margin-top: 14px;
-  font-family: inherit;
+.map-title{
+  text-align:center;
+  color:#145fa0;
+  font-size:24px;
+  font-weight:bold;
 }
 
-input:focus {
-  border-color: #1788d3;
-  box-shadow: 0 0 0 4px #e4f4ff;
+.map-subtitle{
+  text-align:center;
+  color:#748297;
+  font-size:14px;
+  margin:7px 0 22px;
 }
 
-button {
-  border: 0;
-  border-radius: 15px;
-  padding: 14px 22px;
-  font-size: 17px;
-  font-family: inherit;
-  font-weight: bold;
-  cursor: pointer;
-  margin-top: 12px;
+.path{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
 }
 
-.check {
-  width: 100%;
-  background: linear-gradient(135deg, #087dcc, #1554b8);
-  color: white;
-  box-shadow: 0 8px 18px rgba(15,91,170,0.25);
+.node{
+  width:100%;
+  max-width:450px;
+  border:2px solid #dceaf6;
+  border-radius:23px;
+  padding:17px;
+  background:#fff;
+  box-shadow:0 7px 18px rgba(40,80,120,.08);
+  cursor:pointer;
+  transition:.2s;
 }
 
-.check:active {
-  transform: scale(0.98);
+.node:active{
+  transform:scale(.98);
 }
 
-.clue {
-  background: white;
-  color: #1769aa;
-  border: 2px solid #d7eafa;
-  margin: 6px;
-  font-size: 14px;
+.node:hover{
+  transform:translateY(-3px);
+  border-color:#42a9e5;
 }
 
-#clueText {
-  min-height: 25px;
+.icon{
+  font-size:34px;
 }
 
-#result {
-  min-height: 30px;
-  margin-top: 15px;
-  font-size: 18px;
-  font-weight: bold;
-  line-height: 1.7;
-  }
-
-.score {
-  margin-top: 18px;
-  color: #64748b;
-  font-size: 14px;
+.node-title{
+  display:block;
+  margin-top:5px;
+  font-size:19px;
+  font-weight:bold;
+  color:#245277;
 }
 
-.footer {
-  margin-top: 20px;
-  padding-top: 15px;
-  border-top: 1px solid #e5edf6;
-  color: #718096;
-  font-size: 13px;
+.node-desc{
+  display:block;
+  margin-top:5px;
+  font-size:13px;
+  color:#7b8797;
 }
 
-.name {
-  color: #1769aa;
-  font-weight: bold;
+.arrow{
+  font-size:24px;
+  color:#6aaed6;
 }
+
+
+/* =========================
+   LABS
+========================= */
+
+.lab{
+  display:none;
+  margin-top:18px;
+  background:white;
+  border-radius:28px;
+  padding:22px;
+  box-shadow:0 15px 45px rgba(39,78,125,.15);
+}
+
+.lab.active{
+  display:block;
+}
+
+.lab-head{
+  text-align:center;
+}
+
+.lab-head h2{
+  margin:10px 0 6px;
+  color:#145fa0;
+}
+
+.lab-head p{
+  color:#718096;
+  font-size:14px;
+}
+
+.back{
+  border:0;
+  background:#edf7ff;
+  color:#176fa9;
+  padding:9px 15px;
+  border-radius:14px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+
+/* =========================
+   LETTER LAB
+========================= */
+
+.big-letter{
+  width:150px
+  height:150px;
+margin:22px auto;
+border-radius:35px;
+background:linear-gradient(145deg,#e5f7ff,#dbe9ff);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:85px;
+color:#145fa0;
+font-weight:bold;
+box-shadow:0 10px 25px rgba(50,100,150,.12);
+}
+
+.letter-buttons{
+display:flex;
+justify-content:center;
+gap:10px;
+flex-wrap:wrap;
+}
+
+.action{
+border:0;
+padding:13px 18px;
+border-radius:16px;
+background:linear-gradient(135deg,#087dcc,#1554b8);
+color:white;
+cursor:pointer;
+font-weight:bold;
+}
+
+.action:active{
+transform:scale(.97);
+}
+
+.info{
+text-align:center;
+margin-top:17px;
+min-height:35px;
+color:#176fa9;
+font-weight:bold;
+line-height:1.7;
+}
+
+
+/* SOUND LAB */
+
+.sound-letter{
+font-size:78px;
+text-align:center;
+color:#145fa0;
+margin:22px;
+font-weight:bold;
+}
+
+.sound-options{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:12px;
+}
+
+.choice{
+border:2px solid #dceaf6;
+background:white;
+border-radius:18px;
+padding:18px;
+font-size:30px;
+color:#245277;
+cursor:pointer;
+transition:.2s;
+}
+
+.choice:active{
+transform:scale(.97);
+}
+
+.choice.correct{
+background:#e2f8ed;
+border-color:#2db579;
+color:#157347;
+}
+
+.choice.wrong{
+background:#fff0f2;
+border-color:#e16b7a;
+color:#b42335;
+}
+
+
+/* HARAKAT LAB */
+
+.harakat-letter{
+text-align:center;
+font-size:80px;
+color:#145fa0;
+margin:20px;
+font-weight:bold;
+}
+
+.harakat-options{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:10px;
+}
+
+.haraka{
+border:2px solid #dceaf6;
+background:white;
+border-radius:18px;
+padding:18px 8px;
+font-size:28px;
+cursor:pointer;
+color:#245277;
+transition:.2s;
+}
+
+.haraka:active{
+transform:scale(.97);
+}
+
+.haraka.correct{
+background:#e2f8ed;
+border-color:#2db579;
+color:#157347;
+}
+
+.haraka.wrong{
+background:#fff0f2;
+border-color:#e16b7a;
+color:#b42335;
+}
+
+
+/* WORD LAB */
+
+.word-box{
+min-height:110px;
+background:#f7fbff;
+border:2px dashed #bcd9ee;
+border-radius:22px;
+padding:18px;
+display:flex;
+align-items:center;
+justify-content:center;
+gap:10px;
+flex-wrap:wrap;
+}
+
+.tile{
+background:linear-gradient(145deg,#ffffff,#e9f6ff);
+border:2px solid #aad4ee;
+color:#145fa0;
+padding:15px 20px;
+border-radius:17px;
+font-size:24px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.tile:active{
+transform:scale(.96);
+}
+
+.word-actions{
+text-align:center;
+margin-top:18px;
+}
+
+.success{
+text-align:center;
+color:#15804c;
+font-size:18px;
+font-weight:bold;
+min-height:40px;
+margin-top:15px;
+line-height:1.7;
+}
+
+
+/* FOOTER */
+
+.footer{
+text-align:center;
+margin:22px 0 5px;
+color:#718096;
+font-size:12px;
+line-height:1.8;
+}
+
+.footer strong{
+color:#176fa9;
+}
+
+
+/* MOBILE */
+
+@media(max-width:500px){
+
+.app{
+padding:12px;
+}
+
+h1{
+font-size:25px;
+}
+
+.map-title{
+font-size:21px;
+}
+
+.node{
+padding:15px;
+}
+
+.big-letter{
+width:125px;
+height:125px;
+font-size:70px;
+}
+
+.sound-options{
+grid-template-columns:1fr 1fr;
+}
+
+.harakat-options{
+grid-template-columns:repeat(3,1fr);
+}
+
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="game">
+<div class="app">
 
-  <div class="badge">
-    🧠 تحدّي جديد
-  </div>
+<header class="header">
 
-  <h1>
-    لغز الأستاذة شهد عودة
-  </h1>
+<div class="logo">
+🧠
+</div>
 
-  <p class="subtitle">
-    مش كل إجابة بتكون قدام عينك… 👀
-  </p>
+<h1>
+مُحَرِّك اللغة
+</h1>
 
-  <div class="cup">
-    🥤
-  </div>
+<p class="tagline">
+حرّكها... فتتغير!
+</p>
 
-  <div class="card">
+<div class="creator">
+✨ ابتكار وتطوير: الأستاذة شهد سعد عودة
+</div>
 
-    <div class="question">
-      شيءٌ كلما أخذتَ منه كَبُر…<br>
-      فما هو؟ 🤔
-    </div>
+</header>
 
-    <button class="clue" onclick="showClue(1)">
-      💡 تلميح 1
-    </button>
+<section class="map" id="map">
 
-    <button class="clue" onclick="showClue(2)">
-      🔎 تلميح 2
-    </button>
+<div class="map-title">
+🌱 رحلة المستكشف
+</div>
 
-    <div id="clueText"></div>
+<div class="map-subtitle">
+اكتشف أسرار اللغة خطوة بخطوة
+</div>
 
-    <input
-      id="answer"
-      type="text"
-      placeholder="اكتبي إجابتك هنا..."
-      autocomplete="off"
-    >
+<div class="path">
 
-    <button class="check" onclick="checkAnswer()">
-      ✨ أكشف الإجابة
-    </button>
+<button class="node" onclick="openLab('letters')">
 
-    <div id="result"></div>
+<span class="icon">
+🔤
+</span>
 
-  </div>
+<span class="node-title">
+مختبر الحرف
+</span>
 
-  <div class="score">
-    ⭐ محاولاتك:
-    <span id="attempts">0</span>
-  </div>
+<span class="node-desc">
+أتعرف على شكل الحرف واسمه
+</span>
 
-  <div class="footer">
-    صُممت بحب وإبداع بواسطة
-    <span class="name">
-      الأستاذة شهد عودة
-    </span>
-    💙
-  </div>
+</button>
+
+<div class="arrow">
+⬇️
+</div>
+
+<button class="node" onclick="openLab('sounds')">
+
+<span class="icon">
+👂
+</span>
+
+<span class="node-title">
+مختبر الصوت
+</span>
+
+<span class="node-desc">
+أسمع الصوت وأكتشف الحرف
+</span>
+
+</button>
+
+<div class="arrow">
+⬇️
+</div>
+
+<button class="node" onclick="openLab('harakat')">
+
+<span class="icon">
+🎨
+</span>
+
+<span class="node-title">
+مختبر الحركات
+</span>
+
+<span class="node-desc">
+أكتشف كيف تغيّر الحركة صوت الحرف
+</span>
+
+</button>
+
+<div class="arrow">
+⬇️
+</div>
+
+<button class="node" onclick="openLab('words')">
+
+<span class="icon">
+🧩
+</span>
+
+<span class="node-title">
+مختبر تركيب الكلمة
+</span>
+
+<span class="node-desc">
+أحرك القطع وأبني كلمة
+</span>
+
+</button>
+
+</div>
+
+</section>
+
+<section class="lab" id="letters">
+
+<button class="back" onclick="backToMap()">
+← العودة إلى الرحلة
+</button>
+
+<div class="lab-head">
+
+<h2>
+🔤 مختبر الحرف
+</h2>
+
+<p>
+تعرّف على الحرف واكتشف أسراره
+</p>
+
+</div>
+
+<div class="big-letter">
+ب
+</div>
+
+<div class="letter-buttons">
+
+<button class="action" onclick="showLetterName()">
+🔊 اسم الحرف
+</button>
+
+<button class="action" onclick="showLetterSound()">
+👂 صوته
+</button>
+
+<button class="action" onclick="showLetterPositions()">
+🔎 أين يظهر؟
+</button>
+
+</div>
+
+<div class="info" id="letterInfo"></div>
+
+</section>
+
+<section class="lab" id="sounds">
+
+<button class="back" onclick="backToMap()">
+← العودة إلى الرحلة
+</button>
+
+<div class="lab-head">
+
+<h2>
+👂 مختبر الصوت
+</h2>
+
+<p>
+أي حرف يصدر هذا الصوت؟
+</p>
+
+</div>
+
+<div class="sound-letter">
+مَ
+</div>
+
+<div class="sound-options">
+
+<button class="choice" onclick="soundAnswer(this,false)">
+ب
+</button>
+
+<button class="choice" onclick="soundAnswer(this,true)">
+م
+</button>
+
+<button class="choice" onclick="soundAnswer(this,false)">
+ت
+</button>
+
+<button class="choice" onclick="soundAnswer(this,false)">
+س
+</button>
+
+</div>
+
+<div class="info" id="soundInfo"></div>
+
+</section>
+
+<section class="lab" id="harakat">
+
+<button class="back" onclick="backToMap()">
+← العودة إلى الرحلة
+</button>
+
+<div class="lab-head">
+
+<h2>
+🎨 مختبر الحركات
+</h2>
+
+<p>
+أي حركة تجعل الحرف يقول «بُ»؟
+</p>
+
+</div>
+
+<div class="harakat-letter">
+ب
+</div>
+
+<div class="harakat-options">
+
+<button class="haraka" onclick="harakaAnswer(this,false)">
+بَ
+</button>
+
+<button class="haraka" onclick="harakaAnswer(this,false)">
+بِ
+</button>
+
+<button class="haraka" onclick="harakaAnswer(this,true)">
+بُ
+</button>
+
+</div>
+
+<div class="info" id="harakaInfo"></div>
+
+</section>
+
+<section class="lab" id="words">
+
+<button class="back" onclick="backToMap()">
+← العودة إلى الرحلة
+</button>
+
+<div class="lab-head">
+
+<h2>
+🧩 مختبر تركيب الكلمة
+</h2>
+
+<p>
+اضغط على القطع بالترتيب لتكوين كلمة «باب»
+</p>
+
+</div>
+
+<div class="word-box" id="wordBox">
+
+<button class="tile" onclick="addTile('بَا')">
+بَا
+</button>
+
+<button class="tile" onclick="addTile('ب')">
+ب
+</button>
+
+</div>
+
+<div class="word-actions">
+
+<button class="action" onclick="resetWord()">
+🔄 أبدأ من جديد
+</button>
+
+</div>
+
+<div class="success" id="wordResult"></div>
+
+</section>
+
+<div class="footer">
+
+🧠 مُحَرِّك اللغة
+
+<br>
+
+ابتكار وتطوير
+
+<strong>
+الأستاذة شهد سعد عودة
+</strong>
+
+</div>
 
 </div>
 
 <script>
 
-let attempts = 0;
+function openLab(id){
 
-function showClue(number) {
+document.getElementById("map").style.display="none";
 
-  const box = document.getElementById("clueText");
+document.querySelectorAll(".lab").forEach(function(lab){
+lab.classList.remove("active");
+});
 
-  if (number === 1) {
+document.getElementById(id).classList.add("active");
 
-    box.innerHTML =
-      "<p style='color:#1769aa;font-weight:bold'>" +
-      "🤫 فكّري في شيء يمكن أن تحفريه." +
-      "</p>";
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
 
-  }
-
-  if (number === 2) {
-
-    box.innerHTML =
-      "<p style='color:#1769aa;font-weight:bold'>" +
-      "🕳️ كلما أخذتِ منه جزءًا أصبح أكبر." +
-      "</p>";
-
-  }
 }
 
-function checkAnswer() {
 
-  const answer =
-    document.getElementById("answer").value.trim();
+function backToMap(){
 
-  const result =
-    document.getElementById("result");
+document.querySelectorAll(".lab").forEach(function(lab){
+lab.classList.remove("active");
+});
 
-  attempts++;
+document.getElementById("map").style.display="block";
 
-  document.getElementById("attempts").textContent =
-    attempts;
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
 
-  if (answer === "") {
-
-    result.innerHTML =
-      "✏️ اكتبي إجابتك الأول!";
-
-    result.style.color = "#d97706";
-
-    return;
-  }
-
-  const correct =
-    answer.includes("حفرة") ||
-    answer.includes("الحفرة");
-
-  if (correct) {
-
-    result.innerHTML =
-      "🎉 برافوووو! إجابة صحيحة!<br>" +
-      "الإجابة هي: الحُفرة 🕳️";
-
-    result.style.color = "#16834a";
-
-  } else {
-
-    result.innerHTML =
-      "😏 مش هي دي... حاولي تاني!";
-
-    result.style.color = "#d13c3c";
-  }
 }
 
-document
-  .getElementById("answer")
-  .addEventListener("keydown", function(e) {
 
-    if (e.key === "Enter") {
-      checkAnswer();
-    }
+function showLetterName(){
 
-  });
+document.getElementById("letterInfo").innerText =
+"✨ هذا حرف الباء.";
+
+}
+
+
+function showLetterSound(){
+
+document.getElementById("letterInfo").innerText =
+"🔊 صوته: بَ... بَ... بَ";
+
+}
+
+
+function showLetterPositions(){
+
+document.getElementById("letterInfo").innerText =
+"🔎 يمكن أن يأتي في أول الكلمة أو وسطها أو آخرها.";
+
+}
+
+
+function soundAnswer(button,correct){
+
+const buttons =
+document.querySelectorAll("#sounds .choice");
+
+buttons.forEach(function(item){
+item.classList.remove("correct","wrong");
+});
+
+if(correct){
+
+button.classList.add("correct");
+
+document.getElementById("soundInfo").innerText =
+"🎉 ممتاز! هذا هو حرف الميم.";
+
+}
+
+else{
+
+button.classList.add("wrong");
+
+document.getElementById("soundInfo").innerText =
+"💡 حاول مرة أخرى... اسمع الصوت جيدًا.";
+
+}
+
+}
+
+
+function harakaAnswer(button,correct){
+
+const buttons =
+document.querySelectorAll("#harakat .haraka");
+
+buttons.forEach(function(item){
+item.classList.remove("correct","wrong");
+});
+
+if(correct){
+
+button.classList.add("correct");
+
+document.getElementById("harakaInfo").innerText =
+"🎉 رائع! الضمة تجعلنا نقول: بُ";
+
+}
+
+else{
+
+button.classList.add("wrong");
+
+document.getElementById("harakaInfo").innerText =
+"💡 اسمع الصوت مرة أخرى: بُ";
+
+}
+
+}
+
+
+let word = [];
+
+
+function addTile(tile){
+
+if(word.length >= 2){
+return;
+}
+
+word.push(tile);
+
+updateWord();
+
+if(word.length === 2){
+
+if(
+word[0] === "بَا" &&
+word[1] === "ب"
+){
+
+document.getElementById("wordResult").innerText =
+"🎉 أحسنت! بَا + ب = بَاب";
+
+}
+
+else{
+
+document.getElementById("wordResult").innerText =
+"💡 اقتربت! جرّب ترتيب القطع مرة أخرى.";
+
+}
+
+}
+
+}
+
+
+function updateWord(){
+
+const box =
+document.getElementById("wordBox");
+
+box.innerHTML = "";
+
+word.forEach(function(tile){
+
+const span =
+document.createElement("div");
+
+span.className = "tile";
+
+span.innerText = tile;
+
+box.appendChild(span);
+
+});
+
+}
+
+
+function resetWord(){
+
+word = [];
+
+document.getElementById("wordResult").innerText = "";
+
+const box =
+document.getElementById("wordBox");
+
+box.innerHTML = `
+
+<button class="tile" onclick="addTile('بَا')">
+بَا
+</button>
+
+<button class="tile" onclick="addTile('ب')">
+ب
+</button>
+
+`;
+
+}
 
 </script>
 
 </body>
 </html>
+  
+  
