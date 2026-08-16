@@ -2,1322 +2,801 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>مُحَرِّك اللغة 001</title>
 
 <style>
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-
-:root{
-  --bg:#020712;
-  --panel:#061526;
-  --panel2:#081d32;
-  --blue:#22baff;
-  --blue2:#087cff;
-  --cyan:#8de5ff;
-  --green:#35e5a0;
-  --red:#ff5477;
-  --gold:#ffd76a;
-  --text:#edf9ff;
-  --muted:#7195aa;
-}
-
-html,body{
-  margin:0;
-  width:100%;
-  min-height:100%;
-  background:var(--bg);
-  color:var(--text);
-  font-family:Tahoma,Arial,sans-serif;
-}
-
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:Tahoma,Arial,sans-serif}
 body{
-  min-height:100vh;
-  overflow:hidden;
-  background:
-    radial-gradient(circle at 50% 35%,#123c65 0%,#071a30 32%,#020712 72%);
+background:#020711;color:#eaf8ff;overflow-x:hidden;
+background-image:
+radial-gradient(circle at 50% 30%,#073b63 0,#031a2e 25%,#020711 65%);
 }
-
 body:before{
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  opacity:.42;
-  background-image:
-    linear-gradient(rgba(40,180,255,.07) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(40,180,255,.07) 1px,transparent 1px);
-  background-size:42px 42px;
+content:"";position:fixed;inset:0;pointer-events:none;opacity:.18;
+background-image:
+linear-gradient(#1baaff22 1px,transparent 1px),
+linear-gradient(90deg,#1baaff22 1px,transparent 1px);
+background-size:40px 40px;
 }
-
-body:after{
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  box-shadow:inset 0 0 120px #000;
-}
-
 .screen{
-  position:absolute;
-  inset:0;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-  overflow:auto;
+display:none;min-height:100vh;padding:25px 16px;
+align-items:center;justify-content:center;position:relative;
 }
+.screen.active{display:flex;animation:show .5s ease}
+@keyframes show{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:scale(1)}}
 
-.screen.active{
-  display:flex;
-  animation:enter .45s ease;
-}
-
-@keyframes enter{
-  from{opacity:0;transform:scale(1.02)}
-  to{opacity:1;transform:scale(1)}
-}
-
-.container{
-  width:min(920px,95vw);
-  text-align:center;
-  position:relative;
-  z-index:5;
-}
-
-.panel{
-  padding:32px 22px;
-  border-radius:24px;
-  border:1px solid #239ed055;
-  background:linear-gradient(145deg,#071d32ee,#020d1bee);
-  box-shadow:0 0 60px #007dff1c,inset 0 0 35px #008cff08;
-}
-
-.topbar{
-  position:absolute;
-  top:14px;
-  left:18px;
-  right:18px;
-  display:flex;
-  justify-content:space-between;
-  color:#5990ad;
-  font-size:10px;
-  z-index:20;
-}
-
-.footer{
-  position:absolute;
-  bottom:10px;
-  left:0;
-  right:0;
-  text-align:center;
-  color:#41657a;
-  font-size:10px;
-}
-
-.system{
-  color:#50caff;
-  letter-spacing:3px;
-  font-size:11px;
-  margin-bottom:12px;
-}
-
-h1{
-  font-size:clamp(35px,8vw,65px);
-  margin:10px 0;
-  text-shadow:0 0 22px #149fff;
-}
-
-h2{
-  font-size:clamp(25px,6vw,43px);
-  margin:10px 0 20px;
-}
-
-.message{
-  max-width:720px;
-  margin:18px auto;
-  font-size:clamp(17px,4vw,24px);
-  line-height:2;
-  color:#cbeaff;
+.box{
+width:min(900px,96vw);padding:30px 20px;text-align:center;
+border:1px solid #18aef866;border-radius:25px;
+background:linear-gradient(145deg,#061a2ced,#020b15ed);
+box-shadow:0 0 70px #008cff18,inset 0 0 50px #008cff08;
 }
 
 .engine{
-  width:145px;
-  height:145px;
-  margin:0 auto 24px;
-  border:2px solid var(--blue);
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  position:relative;
-  background:#061a2e;
-  box-shadow:0 0 25px #009eff,0 0 75px #0080ff55,inset 0 0 35px #008dff44;
-  animation:pulse 3s infinite;
+width:145px;height:145px;border:2px solid #24baff;
+border-radius:50%;margin:0 auto 25px;display:grid;place-items:center;
+box-shadow:0 0 25px #00aaff,0 0 80px #007cff55,inset 0 0 35px #008cff44;
+animation:pulse 3s infinite;
 }
+@keyframes pulse{50%{box-shadow:0 0 40px #00aaff,0 0 100px #007cff66,inset 0 0 50px #008cff55}}
 
-.engine:before,
-.engine:after{
-  content:"";
-  position:absolute;
-  border:1px solid #38c5ff99;
-  border-radius:50%;
+.core{font-size:48px}
+.system{font-size:11px;letter-spacing:3px;color:#49caff;margin-bottom:12px}
+h1{font-size:clamp(38px,9vw,68px);margin:10px 0;text-shadow:0 0 25px #009dff}
+h2{font-size:clamp(26px,6vw,44px);margin:12px 0 20px}
+p,.text{font-size:18px;line-height:2;color:#c7e7f5}
+.muted{color:#7194a7}
+.blue{color:#4bcaff}
+.green{color:#39e2a0}
+.gold{color:#ffd86a}
+.red{color:#ff5578}
+
+button{
+font-family:inherit;cursor:pointer;
 }
-
-.engine:before{inset:15px}
-.engine:after{inset:33px;border-style:dashed}
-
-.core{
-  font-size:48px;
-  filter:drop-shadow(0 0 14px #1ab8ff);
+.mainBtn{
+border:1px solid #27bcff;color:white;
+background:linear-gradient(#0b4c76,#06253c);
+padding:14px 30px;border-radius:12px;
+font-size:18px;font-weight:bold;
+box-shadow:0 0 25px #008cff22;
 }
+.mainBtn:hover{box-shadow:0 0 30px #008cff66;transform:translateY(-2px)}
 
-@keyframes pulse{
-  50%{
-    box-shadow:0 0 35px #009eff,0 0 90px #0080ff66,inset 0 0 45px #008dff55;
-  }
-}
-
-.btn{
-  border:1px solid #2dbdff;
-  background:linear-gradient(180deg,#0b4770,#06253f);
-  color:#fff;
-  padding:14px 30px;
-  border-radius:12px;
-  font-size:18px;
-  font-weight:bold;
-  cursor:pointer;
-  box-shadow:0 0 20px #009dff22;
-  transition:.2s;
-}
-
-.btn:hover{
-  transform:translateY(-2px);
-  box-shadow:0 0 30px #009dff66;
-}
-
-.btn.small{
-  font-size:14px;
-  padding:9px 17px;
+.smallBtn{
+border:1px solid #237fa6;color:#dff7ff;background:#061d30;
+padding:10px 18px;border-radius:10px;font-size:14px;
 }
 
 .signature{
-  margin-top:22px;
-  color:#6d95aa;
-  font-size:13px;
-  line-height:1.9;
+margin-top:25px;color:#6f94a8;font-size:13px;line-height:1.8;
+}
+.signature strong{color:#bceaff}
+
+.top{
+position:absolute;top:12px;left:16px;right:16px;
+display:flex;justify-content:space-between;
+font-size:10px;color:#547d91;
 }
 
-.signature strong{color:#b4e7ff}
-
-.alert{color:#ff6686}
-.success{color:var(--green)}
-.warning{color:var(--gold)}
-
-.code{
-  width:max-content;
-  max-width:90%;
-  margin:22px auto;
-  padding:13px 22px;
-  border:1px dashed #2abaff;
-  border-radius:10px;
-  color:#e4f9ff;
-  letter-spacing:7px;
-  box-shadow:0 0 25px #008cff18;
+.progress{
+display:flex;justify-content:center;gap:8px;margin:20px 0;
 }
+.progress span{
+width:9px;height:9px;border-radius:50%;background:#17394d;
+}
+.progress span.on{background:#26baff;box-shadow:0 0 12px #26baff}
 
 .options{
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
-  gap:13px;
-  margin:24px auto;
+display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin:25px 0;
 }
-
 .option{
-  min-width:85px;
-  min-height:65px;
-  border:1px solid #267ea7;
-  border-radius:14px;
-  background:#071d31;
-  color:#fff;
-  font-size:28px;
-  cursor:pointer;
-  transition:.2s;
+min-width:90px;min-height:65px;padding:10px 18px;
+border:1px solid #237fa6;border-radius:14px;
+background:#061d30;color:white;font-size:25px;
 }
-
-.option:hover{
-  border-color:#3dc8ff;
-  transform:translateY(-3px);
-  box-shadow:0 0 20px #009dff44;
-}
-
-.bigword{
-  font-size:clamp(48px,12vw,88px);
-  margin:25px 0;
-  text-shadow:0 0 25px #16aaff99;
-}
-
-.missing{
-  display:inline-block;
-  width:65px;
-  border-bottom:3px solid var(--blue);
-  color:var(--blue);
-}
+.option:hover{border-color:#3bc7ff;box-shadow:0 0 20px #008cff44}
 
 .feedback{
-  min-height:55px;
-  margin-top:15px;
-  font-size:17px;
-  line-height:1.8;
+min-height:55px;margin-top:15px;font-size:16px;line-height:1.9;
+}
+.feedback.good{color:#42e5a1}
+.feedback.warn{color:#ffd86a}
+
+.bigword{
+font-size:clamp(50px,13vw,90px);
+margin:25px 0;text-shadow:0 0 30px #008cff88;
 }
 
-.forms{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:12px;
-  max-width:650px;
-  margin:25px auto;
+.wordParts{
+display:flex;justify-content:center;gap:10px;direction:rtl;
+margin:25px 0;flex-wrap:wrap;
+}
+.part{
+font-size:30px;padding:15px 22px;border:1px solid #287da4;
+background:#061e32;border-radius:14px;color:white;
 }
 
-.form{
-  padding:18px 5px;
-  border:1px solid #247fa7;
-  border-radius:14px;
-  background:#061a2d;
-  font-size:34px;
-  cursor:pointer;
+.lab{
+border:1px solid #1c6486;border-radius:18px;padding:20px;
+background:#041525;margin:20px auto;max-width:650px;
 }
 
-.form.selected{
-  border-color:var(--green);
-  box-shadow:0 0 25px #35e5a033;
+.experiment{
+display:flex;align-items:center;justify-content:center;
+gap:12px;flex-wrap:wrap;
 }
-
-.memory{
-  display:flex;
-  justify-content:center;
-  gap:7px;
-  margin:18px 0;
+.letter{
+font-size:34px;padding:15px 20px;border-radius:12px;
+border:1px solid #267da4;background:#08253c;color:white;
 }
-
-.memory span{
-  width:9px;
-  height:9px;
-  border-radius:50%;
-  background:#17384d;
-}
-
-.memory span.on{
-  background:var(--blue);
-  box-shadow:0 0 10px var(--blue);
-}
-
-/* لوحة الأدلة */
+.arrow{font-size:25px;color:#38c7ff}
 
 .evidence{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
-  max-width:700px;
-  margin:25px auto;
+display:grid;grid-template-columns:repeat(3,1fr);
+gap:10px;margin:25px auto;max-width:700px;
+}
+.evidence div{
+padding:16px 8px;border-radius:13px;
+border:1px solid #205a76;background:#061a2b;
+}
+.evidence .locked{opacity:.35}
+.evidence b{display:block;color:#51cbff;margin-bottom:7px}
+
+.lock{
+width:170px;height:170px;border-radius:50%;
+border:2px solid #168fd0;margin:20px auto;
+display:grid;place-items:center;font-size:60px;
+box-shadow:0 0 35px #008cff33;
+}
+.codeInput{
+width:170px;padding:13px;text-align:center;
+font-size:22px;letter-spacing:8px;
+background:#020c16;color:#fff;
+border:1px solid #269bc8;border-radius:10px;
+outline:none;
 }
 
-.evidence-card{
-  border:1px solid #205b78;
-  background:#061a2b;
-  border-radius:13px;
-  padding:14px 8px;
-}
-
-.evidence-card.locked{
-  opacity:.35;
-}
-
-.evidence-card b{
-  display:block;
-  color:#62d3ff;
-  margin-bottom:6px;
-}
-
-/* ترتيب الجملة */
-
-.sentence{
-  display:flex;
-  justify-content:center;
-  gap:8px;
-  flex-wrap:wrap;
-  margin:25px auto;
-  direction:rtl;
-}
-
-.word-card{
-  padding:13px 18px;
-  border:1px solid #267fa8;
-  border-radius:12px;
-  background:#08223a;
-  font-size:23px;
-  cursor:pointer;
-}
-
-.word-card.selected{
-  border-color:var(--gold);
-  box-shadow:0 0 20px #ffd76a33;
-}
-
-.result{
-  font-size:26px;
-  margin:18px 0;
-}
-
-/* النهاية */
-
-.final-box{
-  max-width:720px;
-  margin:auto;
-}
-
-.final-title{
-  font-size:clamp(30px,7vw,55px);
-  text-shadow:0 0 25px #18b6ff;
-}
-
-@media(max-width:600px){
-  .panel{padding:27px 15px}
-  .engine{width:120px;height:120px}
-  .forms{grid-template-columns:repeat(2,1fr)}
-  .evidence{grid-template-columns:1fr 1fr 1fr}
+.secret{
+font-size:clamp(30px,7vw,52px);
+text-shadow:0 0 25px #20baff;
 }
 </style>
 </head>
 
 <body>
 
-<!-- ==================================================
- البداية
-================================================== -->
+<!-- ================= البداية ================= -->
 
 <section id="start" class="screen active">
+<div class="box">
 
-<div class="container">
+<div class="engine"><div class="core">🧠</div></div>
 
-<div class="engine">
-<div class="core">🧠</div>
-</div>
-
-<div class="system">LANGUAGE SYSTEM // 001</div>
+<div class="system">LANGUAGE ENGINE // 001</div>
 
 <h1>مُحَرِّك اللغة 001</h1>
 
-<div class="message">
-النظام يعمل...
+<div class="text">
+تم تشغيل النظام...
 <br>
-لكن هناك شيئًا ليس على ما يرام.
+لكن هناك شيئًا غير طبيعي.
+<br><br>
+<span class="gold">هل أنت مستعد لمعرفة ما حدث؟</span>
 </div>
 
-<button class="btn" onclick="show('alert')">
-🔵 ابدأ التحقيق
+<br>
+
+<button class="mainBtn" onclick="go('boot')">
+🔵 تشغيل التحقيق
 </button>
 
 <div class="signature">
-ابتكار وتطوير
-<br>
+ابتكار وتطوير<br>
 <strong>الأستاذة شهد سعد عودة</strong>
 <br><br>
-«لا تبحث عن الإجابة... اكتشف السر.»
+«مش بنحفظ اللغة... إحنا بنشغّلها.»
 </div>
 
 </div>
-
 </section>
 
 
-<!-- ==================================================
- التنبيه
-================================================== -->
+<!-- ================= التشغيل ================= -->
 
-<section id="alert" class="screen">
+<section id="boot" class="screen">
+<div class="box">
 
-<div class="topbar">
-<span>LANGUAGE SYSTEM</span>
-<span class="alert">● SYSTEM UNSTABLE</span>
-</div>
+<div class="system">SYSTEM BOOT</div>
 
-<div class="container">
+<h2>تم رصد مستخدم جديد...</h2>
 
-<div class="panel">
-
-<div class="system alert">⚠️ SECRET ALERT</div>
-
-<h2>تم اكتشاف خلل لغوي...</h2>
-
-<div class="message">
-بعض الكلمات بدأت تفقد أجزاءً منها.
+<div class="text">
+جارٍ تحليل طريقة التفكير...
 <br>
-رموز مجهولة ظهرت داخل النظام.
+جارٍ تحميل وحدات اللغة...
 <br>
-وسجلّ النظام يحتوي على ملف لا يمكن فتحه.
+جارٍ فحص شبكة الكلمات...
 <br><br>
-<span class="warning">تم اختيارك للتحقيق.</span>
+<span class="red">⚠️ تم اكتشاف اضطراب.</span>
 </div>
 
-<button class="btn" onclick="show('case1')">
-🔍 فتح القضية 001
+<div class="lab">
+<div class="text">
+تم تعيين مهمتك:
+<br><br>
+<strong class="blue">مُشغِّل اللغة</strong>
+<br><br>
+لا تبحث عن الإجابة فقط.
+<br>
+اكتشف كيف يعمل النظام.
+</div>
+</div>
+
+<button class="mainBtn" onclick="go('hub')">
+دخول مركز التحكم
 </button>
 
 </div>
-
-</div>
-
 </section>
 
 
-<!-- ==================================================
- القضية 1
-================================================== -->
+<!-- ================= مركز التحكم ================= -->
 
-<section id="case1" class="screen">
+<section id="hub" class="screen">
+<div class="box">
 
-<div class="topbar">
+<div class="top">
+<span>ENGINE STATUS: ONLINE</span>
 <span>CASE 001</span>
-<span>🔐 LOCKED</span>
 </div>
 
-<div class="container">
+<div class="system">CONTROL CORE</div>
 
-<div class="panel">
+<h2>مركز التحكم</h2>
 
-<div class="system">CASE 001 // THE MISSING LETTER</div>
+<div class="engine"><div class="core">⚙️</div></div>
 
-<h2>🕵️ الكلمة التي اختفت</h2>
-
-<div class="message">
-تم العثور على كلمة...
+<div class="text">
+هناك منطقة واحدة فقط تعمل.
 <br>
-لكن أول جزء منها اختفى.
+<span class="red">بقية الوحدات مغلقة.</span>
 </div>
 
-<div class="bigword">
-<span class="missing">؟</span>َاب
-</div>
-
-<div class="message">
-ما الذي كان هنا؟
-</div>
-
-<div class="options">
-
-<button class="option" onclick="missingLetter('ب')">ب</button>
-<button class="option" onclick="missingLetter('ت')">ت</button>
-<button class="option" onclick="missingLetter('م')">م</button>
-
-</div>
-
-<div id="feed1" class="feedback"></div>
-
-<div class="memory">
-<span class="on"></span>
-<span></span>
-<span></span>
-<span></span>
-<span></span>
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- ==================================================
- اكتشاف 1
-================================================== -->
-
-<section id="discovery1" class="screen">
-
-<div class="container">
-
-<div class="engine">
-<div class="core">🔓</div>
-</div>
-
-<div class="system success">TRACE FOUND</div>
-
-<h2>تم استعادة الكلمة</h2>
-
-<div class="bigword">بَاب</div>
-
-<div class="message">
-أحسنت.
-<br>
-لكن اكتشافك كشف شيئًا أخطر...
-<br><br>
-الحرف لم يختفِ.
-<br>
-لقد تغيّر موقعه داخل النظام.
-</div>
-
-<div class="code">◈ 0 0 1 ◈</div>
-
-<button class="btn" onclick="show('case2')">
-🧩 تتبّع الأثر
+<div class="lab">
+<h3>🧩 مختبر الكلمات</h3>
+<p>
+تم اكتشاف نشاط غير طبيعي داخل إحدى الكلمات.
+</p>
+<button class="mainBtn" onclick="go('case1')">
+فتح القضية 001
 </button>
-
-</div>
-
-</section>
-
-
-<!-- ==================================================
- القضية 2 — أشكال الحرف
-================================================== -->
-
-<section id="case2" class="screen">
-
-<div class="topbar">
-<span>CASE 001 / TRACE 02</span>
-<span>🔓 LOCK 01 OPEN</span>
-</div>
-
-<div class="container">
-
-<div class="panel">
-
-<div class="system">LINGUISTIC TRACE</div>
-
-<h2>سر الحرف</h2>
-
-<div class="message">
-راقب الحرف جيدًا.
-<br>
-إنه الحرف نفسه...
-<br>
-لكن شكله يتغيّر.
-<br><br>
-اكتشف الأشكال الأربعة.
-</div>
-
-<div class="forms">
-
-<div class="form" onclick="findForm(this)">بـ</div>
-<div class="form" onclick="findForm(this)">ـبـ</div>
-<div class="form" onclick="findForm(this)">ـب</div>
-<div class="form" onclick="findForm(this)">ب</div>
-
-</div>
-
-<div id="feed2" class="feedback"></div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- ==================================================
- لوحة الأدلة
-================================================== -->
-
-<section id="evidence" class="screen">
-
-<div class="container">
-
-<div class="panel">
-
-<div class="system">INVESTIGATION BOARD</div>
-
-<h2>🗂 لوحة الأدلة</h2>
-
-<div class="message">
-كل ما اكتشفته حتى الآن أصبح جزءًا من ملف القضية.
 </div>
 
 <div class="evidence">
+<div><b>الحروف</b>🔒 مغلق</div>
+<div><b>الكلمات</b>🟢 نشط</div>
+<div><b>الجمل</b>🔒 مغلق</div>
+</div>
 
-<div class="evidence-card">
-<b>01</b>
-الحرف المفقود
+</div>
+</section>
+
+
+<!-- ================= لغز 1 ================= -->
+
+<section id="case1" class="screen">
+<div class="top">
+<span>CASE 001</span><span>TRACE 01</span>
+</div>
+
+<div class="box">
+
+<div class="system">THE MISSING PART</div>
+
+<h2>🕵️ الكلمة المعطوبة</h2>
+
+<p>
+النظام استقبل كلمة غير مكتملة.
 <br>
-<span class="success">مستعاد</span>
+اكتشف الجزء المفقود.
+</p>
+
+<div class="bigword">؟َاب</div>
+
+<div class="options">
+<button class="option" onclick="answer1('ب')">ب</button>
+<button class="option" onclick="answer1('ت')">ت</button>
+<button class="option" onclick="answer1('م')">م</button>
 </div>
 
-<div class="evidence-card">
-<b>02</b>
-شكل الحرف
+<div id="f1" class="feedback"></div>
+
+<div class="progress">
+<span class="on"></span><span></span><span></span><span></span><span></span>
+</div>
+
+</div>
+</section>
+
+
+<!-- ================= اكتشاف 1 ================= -->
+
+<section id="discover1" class="screen">
+<div class="box">
+
+<div class="engine"><div class="core">🔓</div></div>
+
+<div class="system">PATTERN DETECTED</div>
+
+<h2>تم اكتشاف أول دليل</h2>
+
+<div class="bigword">بَاب</div>
+
+<p>
+الحرف لم يكن مفقودًا...
 <br>
-<span class="success">مكتشف</span>
+كان مخفيًا.
+<br><br>
+<strong class="green">تمت إضافة دليل إلى ملفك.</strong>
+</p>
+
+<div class="lab">
+<span class="blue">EVIDENCE 01</span>
+<br><br>
+الحرف جزء أساسي من بناء الكلمة.
 </div>
 
-<div class="evidence-card locked">
-<b>03</b>
-تأثير الحرف
-<br>
-مغلق
-</div>
-
-</div>
-
-<div class="code">
-① — ② — ؟
-</div>
-
-<button class="btn" onclick="show('case3')">
-فتح الدليل التالي
+<button class="mainBtn" onclick="go('case2')">
+متابعة التحقيق ←
 </button>
 
 </div>
-
-</div>
-
 </section>
 
 
-<!-- ==================================================
- القضية 3 — تغيير حرف
-================================================== -->
+<!-- ================= لغز 2 ================= -->
+
+<section id="case2" class="screen">
+<div class="box">
+
+<div class="system">LINGUISTIC LAB // 02</div>
+
+<h2>🧬 مختبر تغيير الحرف</h2>
+
+<p>
+النظام يسمح لك بتغيير حرف واحد فقط.
+<br>
+جرّب وشاهد ما الذي يحدث.
+</p>
+
+<div class="lab">
+
+<div class="bigword" id="word">بَاب</div>
+
+<div class="experiment">
+
+<button class="letter" onclick="changeWord('ت')">ت</button>
+<div class="arrow">←</div>
+<div class="letter">ب</div>
+<div class="arrow">←</div>
+<div class="letter">ا</div>
+<div class="arrow">←</div>
+<div class="letter">ب</div>
+
+</div>
+
+</div>
+
+<div id="f2" class="feedback"></div>
+
+</div>
+</section>
+
+
+<!-- ================= دليل 2 ================= -->
+
+<section id="discover2" class="screen">
+<div class="box">
+
+<div class="system">NEW RULE DETECTED</div>
+
+<h2>⚡ اكتشاف جديد</h2>
+
+<div class="text">
+أنت لم تحفظ قاعدة.
+<br>
+أنت رأيت أثرها بنفسك.
+</div>
+
+<div class="lab">
+<div class="blue">الدليل 02</div>
+<br><br>
+تغيير حرف واحد يمكن أن يغيّر الكلمة.
+<br>
+وقد يتغيّر المعنى معها.
+</div>
+
+<button class="mainBtn" onclick="go('case3')">
+فتح المختبر التالي
+</button>
+
+</div>
+</section>
+
+
+<!-- ================= لغز 3 ================= -->
 
 <section id="case3" class="screen">
+<div class="box">
 
-<div class="topbar">
-<span>CASE 001 / TRACE 03</span>
-<span>🔐 LOCK 02</span>
-</div>
+<div class="system">LETTER FORMS // 03</div>
 
-<div class="container">
+<h2>🔍 سر الحرف</h2>
 
-<div class="panel">
-
-<div class="system">CORE CHANGE</div>
-
-<h2>🧬 الحرف الذي يغيّر الكلمة</h2>
-
-<div class="message">
-الكلمة أمامك.
+<p>
+الحرف نفسه يظهر بأشكال مختلفة.
 <br>
-غيّر شيئًا واحدًا فقط.
-<br>
-راقب ما يحدث.
+اضغط على الأشكال واكتشف النمط.
+</p>
+
+<div class="wordParts">
+<button class="part" onclick="formFound(this)">بـ</button>
+<button class="part" onclick="formFound(this)">ـبـ</button>
+<button class="part" onclick="formFound(this)">ـب</button>
+<button class="part" onclick="formFound(this)">ب</button>
 </div>
 
-<div id="dynamicWord" class="bigword">بَاب</div>
-
-<div class="options">
-
-<button class="option" onclick="changeLast('ب')">ب</button>
-<button class="option" onclick="changeLast('ت')">ت</button>
-<button class="option" onclick="changeLast('ج')">ج</button>
+<div id="f3" class="feedback"></div>
 
 </div>
-
-<div id="feed3" class="feedback"></div>
-
-</div>
-
-</div>
-
 </section>
 
 
-<!-- ==================================================
- القضية 4 — إعادة بناء
-================================================== -->
+<!-- ================= الأدلة ================= -->
+
+<section id="board" class="screen">
+<div class="box">
+
+<div class="system">INVESTIGATION DATABASE</div>
+
+<h2>🗂 ملف الأدلة</h2>
+
+<p>
+كل ما اكتشفته أصبح جزءًا من نظامك.
+</p>
+
+<div class="evidence">
+
+<div>
+<b>01</b>
+الحرف يبني الكلمة
+<br><span class="green">مكتشف</span>
+</div>
+
+<div>
+<b>02</b>
+تغيير الحرف
+<br><span class="green">مكتشف</span>
+</div>
+
+<div>
+<b>03</b>
+أشكال الحرف
+<br><span class="green">مكتشف</span>
+</div>
+
+<div class="locked">
+<b>04</b>
+تركيب الكلمة
+<br>🔒
+</div>
+
+<div class="locked">
+<b>05</b>
+معنى الجملة
+<br>🔒
+</div>
+
+<div class="locked">
+<b>06</b>
+الملف السري
+<br>🔒
+</div>
+
+</div>
+
+<button class="mainBtn" onclick="go('case4')">
+فتح الدليل 04
+</button>
+
+</div>
+</section>
+
+
+<!-- ================= تركيب كلمة ================= -->
 
 <section id="case4" class="screen">
+<div class="box">
 
-<div class="container">
-
-<div class="panel">
-
-<div class="system">CASE 002 // REBUILD</div>
+<div class="system">WORD RECONSTRUCTION // 04</div>
 
 <h2>🧩 أعد تشغيل الكلمة</h2>
 
-<div class="message">
-الكلمة تفككت.
+<p>
+الكلمة تفككت إلى أجزاء.
 <br>
-اضغط على الحروف بالترتيب الذي يعيدها إلى العمل.
-</div>
+أعد بناءها بالترتيب الصحيح.
+</p>
 
-<div class="sentence">
-<div class="word-card" id="slot1">؟</div>
-<div class="word-card" id="slot2">؟</div>
-<div class="word-card" id="slot3">؟</div>
-</div>
+<div class="bigword" id="buildWord">_ _ _</div>
 
 <div class="options">
-
 <button class="option" onclick="build('ب')">ب</button>
 <button class="option" onclick="build('ا')">ا</button>
 <button class="option" onclick="build('ب')">ب</button>
-
 </div>
 
-<div id="feed4" class="feedback"></div>
+<div id="f4" class="feedback"></div>
 
 </div>
-
-</div>
-
 </section>
 
 
-<!-- ==================================================
- القضية 5 — صائد الخطأ
-================================================== -->
+<!-- ================= قفل ================= -->
 
-<section id="case5" class="screen">
+<section id="lock" class="screen">
+<div class="box">
 
-<div class="container">
+<div class="system">SECURITY GATE</div>
 
-<div class="panel">
+<h2>🔐 قفل لغوي</h2>
 
-<div class="system">CASE 003 // ERROR HUNTER</div>
+<div class="lock">🔒</div>
 
-<h2>🕵️ صائد الخطأ</h2>
-
-<div class="message">
-ثلاث كلمات دخلت النظام.
+<p>
+لقد جمعت الأدلة.
 <br>
-واحدة منها تحمل أثرًا غير طبيعي.
-<br>
-لا تتسرع.
-</div>
-
-<div class="options">
-
-<button class="option" onclick="errorHunt(false)">
-قَلَم
-</button>
-
-<button class="option" onclick="errorHunt(true)">
-قَلَمَ
-</button>
-
-<button class="option" onclick="errorHunt(false)">
-كِتَاب
-</button>
-
-</div>
-
-<div id="feed5" class="feedback"></div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- ==================================================
- القضية 6 — الجملة
-================================================== -->
-
-<section id="case6" class="screen">
-
-<div class="container">
-
-<div class="panel">
-
-<div class="system">CASE 004 // SENTENCE SHIFT</div>
-
-<h2>🧠 الجملة المتحركة</h2>
-
-<div class="message">
-حرّك كلمة واحدة.
-<br>
-لاحظ كيف يتغيّر المعنى.
-</div>
-
-<div class="sentence">
-
-<div class="word-card" onclick="sentencePick(this)">
-الولد
-</div>
-
-<div class="word-card" onclick="sentencePick(this)">
-قرأ
-</div>
-
-<div class="word-card" onclick="sentencePick(this)">
-الكتاب
-</div>
-
-</div>
-
-<div id="sentenceResult" class="result">
-الولد قرأ الكتاب.
-</div>
-
-<div id="feed6" class="feedback"></div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- ==================================================
- غرفة الشفرة
-================================================== -->
-
-<section id="cipher" class="screen">
-
-<div class="container">
-
-<div class="engine">
-<div class="core">🔐</div>
-</div>
-
-<div class="system">FINAL ACCESS</div>
-
-<h2>تم جمع الأدلة</h2>
-
-<div class="message">
-الحرف...
-<br>
-مكانه...
-<br>
-شكله...
-<br>
-تأثيره...
-<br>
-والكلمة داخل الجملة.
+لكن النظام يريد رمزًا.
 <br><br>
-كل اكتشاف فتح جزءًا من النظام.
-</div>
+تذكّر أول كلمة استعدتها.
+</p>
 
-<div class="code">
-① — ② — ③ — ④ — ⑤
-</div>
+<input id="code" class="codeInput" maxlength="3" placeholder="___">
 
-<button class="btn" onclick="show('secret')">
-فتح الملف السري
+<br><br>
+
+<button class="mainBtn" onclick="unlock()">
+فتح القفل
 </button>
 
-</div>
+<div id="lockFeed" class="feedback"></div>
 
+</div>
 </section>
 
 
-<!-- ==================================================
- الملف السري
-================================================== -->
+<!-- ================= النهاية السرية ================= -->
 
-<section id="secret" class="screen">
+<section id="ending" class="screen">
+<div class="box">
 
-<div class="container">
+<div class="engine"><div class="core">?</div></div>
 
-<div class="panel">
+<div class="system red">CLASSIFIED FILE FOUND</div>
 
-<div class="system alert">⚠️ CLASSIFIED FILE</div>
+<h2 class="secret">الملف 000</h2>
 
-<h2>الملف 000</h2>
+<div class="text">
 
-<div class="message">
-جارٍ فك التشفير...
+تم فتح النظام...
 <br><br>
-تم العثور على سجل قديم.
-<br>
-تاريخ التسجيل: غير معروف.
-<br>
-صاحب العملية: غير معروف.
-<br><br>
-ثم تظهر الرسالة:
-</div>
 
-<div class="code">
+لكن هناك شيء غير منطقي.
+
+<br><br>
+
+<span class="gold">
 هذه ليست أول مرة يحدث فيها الخلل.
-</div>
+</span>
 
-<button class="btn" onclick="show('twist')">
-فتح السجل
-</button>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- ==================================================
- المفاجأة
-================================================== -->
-
-<section id="twist" class="screen">
-
-<div class="container">
-
-<div class="engine">
-<div class="core">?</div>
-</div>
-
-<div class="system alert">UNKNOWN SIGNAL</div>
-
-<h2>لحظة...</h2>
-
-<div class="message">
+<br><br>
 
 أنت لم تُختر بالصدفة.
 
 <br><br>
 
-هناك شخص بدأ تشغيل النظام قبلك.
+هناك شخص بدأ تشغيل المحرك قبلك.
 
-<br>
+</div>
 
-والأغرب...
-
+<div class="lab">
+<span class="blue">رسالة مجهولة:</span>
 <br><br>
-
-<b>
-أنه ترك لك رسالة.
-</b>
-
+«إذا وصلت إلى هنا...
+فقد بدأنا من جديد.»
 </div>
 
-<div class="code">
-«إذا وصلت إلى هنا... فقد بدأنا من جديد.»
-</div>
-
-<button class="btn" onclick="show('ending')">
-متابعة
+<button class="mainBtn" onclick="go('final')">
+فتح آخر سجل
 </button>
 
 </div>
-
 </section>
 
 
-<!-- ==================================================
- النهاية الجديدة
-================================================== -->
+<!-- ================= النهاية ================= -->
 
-<section id="ending" class="screen">
-
-<div class="container">
-
-<div class="final-box">
+<section id="final" class="screen">
+<div class="box">
 
 <div class="system">SYSTEM STATUS</div>
 
-<div class="final-title">
-مُحَرِّك اللغة 001
-</div>
+<div class="secret">مُحَرِّك اللغة 001</div>
 
-<div class="message">
+<div class="text">
 
 القضية 001:
 <br>
-<b class="success">مغلقة.</b>
+<span class="green">مغلقة.</span>
 
 <br><br>
 
-لكن النظام لم يُصلح بالكامل.
+لكن المحرك لم يعد كما كان.
 
-<br>
+<br><br>
 
+<span class="gold">
 لقد فتحت شيئًا كان مغلقًا منذ البداية.
-
-<br><br>
-
-<span class="warning">
-CASE 000
 </span>
 
 <br><br>
 
-<b>
-المحقق التالي ينتظرك.
-</b>
+<b>CASE 002</b>
+<br>
+الحرف المفقود... ليس هو المشكلة.
 
 </div>
 
-<div class="code">
-CASE 002 // THE LOST SYMBOL
+<div class="lab">
+<span class="blue">المحقق التالي ينتظرك.</span>
 </div>
 
 <div class="signature">
-ابتكار وتطوير
-<br>
+ابتكار وتطوير<br>
 <strong>الأستاذة شهد سعد عودة</strong>
+<br><br>
+«مش بنحفظ اللغة... إحنا بنشغّلها.»
 </div>
 
 <br>
 
-<button class="btn" onclick="location.reload()">
+<button class="mainBtn" onclick="location.reload()">
 🔄 إعادة التحقيق
 </button>
 
 </div>
-
-</div>
-
 </section>
 
 
-<div class="footer">
-مُحَرِّك اللغة 001 © الأستاذة شهد سعد عودة
-</div>
-
-
 <script>
-
-/* =========================================
-   حالة اللعبة
-========================================= */
-
+let forms=0;
 let buildLetters=[];
-let foundForms=0;
-let sentenceChanged=false;
 
-
-/* =========================================
-   التنقل
-========================================= */
-
-function show(id){
-
-  document.querySelectorAll(".screen").forEach(function(s){
-    s.classList.remove("active");
-  });
-
-  const screen=document.getElementById(id);
-
-  if(screen){
-    screen.classList.add("active");
-  }
-
+function go(id){
+document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+document.getElementById(id).classList.add("active");
+window.scrollTo(0,0);
 }
 
+function answer1(x){
+let f=document.getElementById("f1");
 
-/* =========================================
-   القضية 1
-========================================= */
-
-function missingLetter(letter){
-
-  const f=document.getElementById("feed1");
-
-  if(letter==="ب"){
-
-    f.className="feedback success";
-
-    f.innerHTML=
-      "🔓 تم العثور على الجزء المفقود."+
-      "<br>"+
-      "الكلمة عادت إلى النظام."+
-      "<br><br>"+
-      "<button class='btn small' onclick=\"show('discovery1')\">"+
-      "فتح الأثر ←"+
-      "</button>";
-
-  }else{
-
-    f.className="feedback";
-
-    f.innerHTML=
-      "الإشارة ليست هنا..."+
-      "<br>"+
-      "لا تتسرع. انظر إلى الكلمة كاملة.";
-
-  }
-
+if(x==="ب"){
+f.className="feedback good";
+f.innerHTML=
+"🔓 تم اكتشاف الجزء المفقود."+
+"<br>الكلمة عادت للعمل."+
+"<br><br>"+
+"<button class='smallBtn' onclick=\"go('discover1')\">فتح الدليل ←</button>";
+}else{
+f.className="feedback warn";
+f.innerHTML="الإشارة غير صحيحة... راقب الكلمة كاملة وحاول مرة أخرى.";
+}
 }
 
+function changeWord(x){
+let w=document.getElementById("word");
+let f=document.getElementById("f2");
 
-/* =========================================
-   اكتشاف أشكال الحرف
-========================================= */
-
-function findForm(element){
-
-  if(!element.classList.contains("selected")){
-
-    element.classList.add("selected");
-
-    foundForms++;
-
-  }
-
-  const f=document.getElementById("feed2");
-
-  if(foundForms<4){
-
-    f.className="feedback";
-
-    f.innerHTML=
-      "اكتشفت شكلاً من أشكال الحرف."+
-      "<br>"+
-      "ابحث عن بقية الأشكال.";
-
-  }else{
-
-    f.className="feedback success";
-
-    f.innerHTML=
-      "⚡ تم اكتشاف السر الثاني."+
-      "<br>"+
-      "الحرف نفسه يمكن أن يتغير شكله حسب مكانه."+
-      "<br><br>"+
-      "<button class='btn small' onclick=\"show('evidence')\">"+
-      "حفظ الدليل ←"+
-      "</button>";
-
-  }
-
+if(x==="ت"){
+w.textContent="تَاب";
+f.className="feedback good";
+f.innerHTML=
+"⚡ تغيّرت الكلمة."+
+"<br>حرف واحد فقط تغيّر."+
+"<br><br>"+
+"<button class='smallBtn' onclick=\"go('discover2')\">تسجيل الدليل ←</button>";
+}
 }
 
+function formFound(el){
+if(el.dataset.found)return;
+el.dataset.found="1";
+el.style.borderColor="#39e2a0";
+el.style.boxShadow="0 0 20px #39e2a044";
+forms++;
 
-/* =========================================
-   تغيير الحرف
-========================================= */
+let f=document.getElementById("f3");
 
-function changeLast(letter){
-
-  const word=document.getElementById("dynamicWord");
-  const f=document.getElementById("feed3");
-
-  word.textContent="بَا"+letter;
-
-  if(letter==="ب"){
-
-    f.className="feedback";
-
-    f.textContent=
-      "لم يتغير شيء. جرّب تغيير الحرف.";
-
-  }else{
-
-    f.className="feedback success";
-
-    f.innerHTML=
-      "💡 لاحظت التغيير."+
-      "<br>"+
-      "تغيير حرف واحد صنع كلمة مختلفة."+
-      "<br><br>"+
-      "<button class='btn small' onclick=\"show('case4')\">"+
-      "تسجيل الاكتشاف ←"+
-      "</button>";
-
-  }
-
+if(forms<4){
+f.className="feedback";
+f.textContent="تم العثور على شكل جديد. ابحث عن بقية الأشكال.";
+}else{
+f.className="feedback good";
+f.innerHTML=
+"🧠 تم اكتشاف النمط."+
+"<br>شكل الحرف يتغير حسب موقعه."+
+"<br><br>"+
+"<button class='smallBtn' onclick=\"go('board')\">حفظ الدليل ←</button>";
+}
 }
 
+function build(x){
+if(buildLetters.length>=3)return;
 
-/* =========================================
-   إعادة بناء الكلمة
-========================================= */
+buildLetters.push(x);
+document.getElementById("buildWord").textContent=buildLetters.join(" ");
 
-function build(letter){
+if(buildLetters.length===3){
 
-  if(buildLetters.length>=3) return;
+let f=document.getElementById("f4");
 
-  buildLetters.push(letter);
+if(buildLetters.join("")==="باب"){
 
-  document.getElementById(
-    "slot"+buildLetters.length
-  ).textContent=letter;
+f.className="feedback good";
+f.innerHTML=
+"🟢 الكلمة عادت للعمل."+
+"<br>أنت بنيت الكلمة بنفسك."+
+"<br><br>"+
+"<button class='smallBtn' onclick=\"go('lock')\">التوجه إلى القفل ←</button>";
 
-  if(buildLetters.length===3){
+}else{
 
-    const f=document.getElementById("feed4");
+f.className="feedback warn";
+f.textContent="التركيب غير مستقر. أعد المحاولة.";
 
-    if(
-      buildLetters[0]==="ب" &&
-      buildLetters[1]==="ا" &&
-      buildLetters[2]==="ب"
-    ){
-
-      f.className="feedback success";
-
-      f.innerHTML=
-        "🔓 الكلمة عادت للعمل."+
-        "<br>"+
-        "أنت لم تعطِ الإجابة... أنت بنيتها."+
-        "<br><br>"+
-        "<button class='btn small' onclick=\"show('case5')\">"+
-        "القضية التالية ←"+
-        "</button>";
-
-    }else{
-
-      f.className="feedback";
-
-      f.textContent=
-        "التركيب غير صحيح... أعد بناء الكلمة.";
-
-      setTimeout(function(){
-
-        buildLetters=[];
-
-        document.getElementById("slot1").textContent="؟";
-        document.getElementById("slot2").textContent="؟";
-        document.getElementById("slot3").textContent="؟";
-
-      },700);
-
-    }
-
-  }
-
+setTimeout(()=>{
+buildLetters=[];
+document.getElementById("buildWord").textContent="_ _ _";
+},800);
+}
+}
 }
 
+function unlock(){
 
-/* =========================================
-   صائد الخطأ
-========================================= */
+let value=document.getElementById("code").value.trim();
+let f=document.getElementById("lockFeed");
 
-function errorHunt(correct){
+if(value==="باب"){
 
-  const f=document.getElementById("feed5");
+f.className="feedback good";
+f.innerHTML=
+"🔓 تم فتح البوابة."+
+"<br><br>"+
+"<button class='smallBtn' onclick=\"go('ending')\">فتح الملف السري ←</button>";
 
-  if(correct){
+}else{
 
-    f.className="feedback success";
-
-    f.innerHTML=
-      "🎯 تم العثور على الأثر."+
-      "<br>"+
-      "أنت بدأت تلاحظ ما لا تلاحظه العين بسرعة."+
-      "<br><br>"+
-      "<button class='btn small' onclick=\"show('case6')\">"+
-      "فتح القضية التالية ←"+
-      "</button>";
-
-  }else{
-
-    f.className="feedback";
-
-    f.textContent=
-      "ليست هذه الكلمة... ابحث عن التفصيلة المختلفة.";
-
-  }
+f.className="feedback warn";
+f.textContent="الرمز غير صحيح. تذكّر أول كلمة استعدتها.";
 
 }
+}
+</script>
 
-
-/* =========================================
-   الجملة المتحركة
-========================================= */
-
-function sentencePick(element){
-
-  document.querySelectorAll(".word-card").forEach(function(card){
-    card.classList.remove("selected");
-  });
-
-  element.classList.add("selected");
-
-  const result=document.getElementById("sentenceResult");
-  const f=document.getElementById("feed6");
-
-  if(element.textContent.trim()==="قرأ"){
-
-    result.textContent="قرأ الولد الكتاب.";
-
-    f.className="feedback success";
-
-    f.innerHTML=
+</body>
+</html>
